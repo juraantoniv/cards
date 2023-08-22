@@ -1,0 +1,64 @@
+.common {
+  display: flex;
+  align-items: center;
+  width: 660px;
+}
+
+.activeNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+  margin: 2px;
+
+  font-family: Roboto, serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-dark-700);
+
+  background: var(--color-light-100);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+  margin: 2px;
+
+  font-family: Roboto, serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-light-100);
+
+  background: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-dark-700);
+  }
+}
+
+.arrow {
+  width: 27px;
+  height: 27px;
+
+  &:hover {
+    background: var(--color-dark-700);
+  }
+}
+
+.blockSeleckWithWords {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}

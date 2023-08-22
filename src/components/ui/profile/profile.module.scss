@@ -1,0 +1,45 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 26.25rem;
+  height: 21.75rem;
+  padding: 2.06rem 5.25rem 2.56rem;
+}
+
+.blockUserAndIcon {
+  position: relative;
+  display: flex;
+  align-items: end;
+}
+
+.iconUser {
+  width: 6rem;
+  height: 6rem;
+  margin-top: 1.5rem;
+}
+
+.iconEdit {
+  position: absolute;
+  right: 3%;
+  bottom: 3%;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  background: var(--color-dark-300);
+  border-radius: 0.3rem;
+}
+
+.blockNameAndIcon {
+  display: flex;
+  gap: 0.56rem;
+  align-items: center;
+}
+
+.address {
+  margin-bottom: 1rem;
+  color: var(--color-dark-100);
+}

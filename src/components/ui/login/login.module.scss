@@ -1,0 +1,44 @@
+.common {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: space-between;
+
+  width: 420px;
+  height: 528px;
+  margin-top: 200px;
+  padding: 2.06rem 2.25rem 1.81rem;
+}
+
+.singIn {
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.controlTextFieldEmail {
+  margin-top: 2rem;
+}
+
+.forgotPassword {
+  margin: 0 0 2rem;
+  text-align: right;
+}
+
+.forgotPassword a {
+  text-decoration: none;
+}
+
+.button {
+  width: 18rem;
+  margin: 1.8rem 0 0;
+}
+
+.text {
+  margin: 2rem 0 0;
+  text-align: center;
+}
+
+.singUp {
+  color: #8c61ff;
+  text-align: center;
+}

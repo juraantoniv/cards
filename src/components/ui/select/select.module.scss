@@ -1,0 +1,39 @@
+.selectTrigger {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 8px;
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-500);
+  outline: none; /* занулил белый контур при клике на рамку */
+  &:hover {
+    background: var(--color-dark-700);
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.selectContent {
+  width: 100%;
+  margin-top: -1px;
+  background-color: transparent;
+  border: 1px solid var(--color-dark-500);
+}
+
+.item {
+  padding: 6px;
+  outline: none;
+
+  &:hover {
+    background: var(--color-accent-900);
+  }
+}

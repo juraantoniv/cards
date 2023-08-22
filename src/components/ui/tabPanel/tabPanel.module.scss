@@ -1,0 +1,34 @@
+.common {
+  height: 67px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tabTrigger {
+  padding: 6px 24px;
+  background-color: transparent;
+  border: 1px solid var(--color-dark-500);
+  border-radius: 3px;
+
+  &:focus-visible {
+    /* использование кнопки Tab */
+    outline: 1px solid var(--color-info-700);
+  }
+
+  &:hover {
+    background: var(--color-dark-500);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    background: var(--color-dark-700);
+  }
+}
+
+.active {
+  padding: 6px 24px;
+  background-color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-700);
+  border-radius: 3px;
+}

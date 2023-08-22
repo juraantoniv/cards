@@ -1,0 +1,66 @@
+.common {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.blockUnderCheckboxDisabled {
+  width: 55px;
+  height: 55px;
+  padding: 15px;
+  border-radius: 99px;
+}
+
+.blockUnderCheckbox {
+  width: 55px;
+  height: 55px;
+  padding: 15px;
+  border-radius: 99px;
+
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+
+  &:active {
+    background-color: var(--color-dark-300);
+  }
+}
+
+.checkboxTrue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  background-color: var(--color-light-100);
+  border: 2px solid var(--color-light-100);
+  border-radius: 4px;
+
+  &:disabled {
+    background-color: var(--color-dark-300);
+    border: 2px solid var(--color-dark-300);
+  }
+}
+
+.checkboxFalse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  background-color: var(--color-dark-500);
+  border: 2px solid var(--color-light-100);
+  border-radius: 4px;
+}
+
+.checkboxIndicator svg {
+  /*  svg если убрать то галка не по середине
+                                       будет распологатся */
+
+  transform: scale(1.9); /* увеличение размера иконки */
+  color: black;
+}
