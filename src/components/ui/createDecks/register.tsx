@@ -50,19 +50,19 @@ export const DecksForm: React.FC<createDecksType> = ({
 
   const handlerOnSubmit = (data: createDecks) => {
     if (!forEditFlag) {
-      createDeck({ name: data.name, isPrivate: data.isPrivate });
+      toast.info("Creating Decks");
+      createDeck({ name: data.name, isPrivate: data.isPrivate })
+        .unwrap()
+        .then(() => {
+          toast.success("Success");
+          callback();
+        })
+        .catch(() => {
+          toast.error("Wrong login or password");
+        });
     } else {
       editDeck({ name: data.name, id });
     }
-    createDeck({ name: data.name, isPrivate: data.isPrivate })
-      .unwrap()
-      .then(() => {
-        toast.success("Success");
-        callback();
-      })
-      .catch(() => {
-        toast.error("Wrong login or password");
-      });
   };
 
   return (
