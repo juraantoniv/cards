@@ -1,11 +1,14 @@
 import { useState } from "react";
 
+import Rating from "@mui/material/Rating";
+
 import { carsdType } from "../../../../decs-query.ts";
 import { ArrowIconDown } from "../../../assets/icons/arrowIconDown.tsx";
 import { ArrowUpIcon } from "../../../assets/icons/arrowUpIcon.tsx";
 import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
+import { RatingComponent } from "../starRating/startRatingComponent.tsx";
 
 import st from "./tableDecks.module.scss";
 
@@ -23,6 +26,7 @@ type PropsType = {
   dataContentTable: carsdType;
   dataHeadersTable?: DataHeaderType[];
   sendDataToServer?: (value: string) => void;
+  callback: (id: string) => void;
 };
 type SortType = {
   key: string;
@@ -32,6 +36,7 @@ export const TableDecksItems = ({
   dataContentTable,
   dataHeadersTable,
   sendDataToServer,
+  callback,
 }: PropsType) => {
   const [sort, setSort] = useState<SortType>(null);
   const handlerSort = (key: string) => {
@@ -55,6 +60,12 @@ export const TableDecksItems = ({
         sendDataToServer(`${updatedSort.key}-${updatedSort.direction}`);
       }
     }
+  };
+
+  console.log(dataContentTable?.items);
+
+  const handler = (deckId: string) => {
+    callback(deckId);
   };
 
   return (
@@ -87,11 +98,17 @@ export const TableDecksItems = ({
             <td className={st.tdCommonStyle}>{item.question}</td>
             <td className={st.tdCommonStyle}>{item.answer}</td>
             <td className={st.tdCommonStyle}>{item.created}</td>
-            <td className={st.tdCreatedBy}>{item.rating}</td>
+            <td className={st.tdCommonStyle}>
+              <Rating
+                name={"rating"}
+                defaultValue={1}
+                value={item?.grade === 0 ? 1 : Number(item?.grade)}
+              />
+            </td>
             <td className={st.tdIcons}>
               <PlayIcon />
               <EditIcon />
-              <DeleteIcon />
+              <DeleteIcon onClick={() => handler(item.id)} />
             </td>
           </tr>
         ))}

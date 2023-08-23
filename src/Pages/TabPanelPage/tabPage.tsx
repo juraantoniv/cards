@@ -16,7 +16,7 @@ const TabPage = () => {
 
   const [getUsers, {}] = useLazyGetDecksQuery();
 
-  const [active, setActive] = useState("MyCards");
+  const [active, setActive] = useState("All");
   const handlerTabPanel1 = (name: string) => {
     setActive(name);
     dispatch(decksSlice.actions.setAuthorId(myId));

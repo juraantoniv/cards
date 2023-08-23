@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { useCreateDeckMutation } from "../../../../decs-query.ts";
+import {
+  useCreateDeckMutation,
+  useEditDeckMutation,
+} from "../../../../decs-query.ts";
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
@@ -19,29 +22,43 @@ import st from "./register.module.scss";
 
 const loginSchema = z.object({
   name: z.string().min(3),
-  isPrivate: z.boolean(),
+  isPrivate: z.boolean().default(false),
 });
 
 type createDecksType = {
   callback: () => void;
+  headerName?: string;
+  forEditFlag: boolean;
+  id?: string;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
 
 type createDecks = z.infer<typeof loginSchema>;
-export const CreateDecksForm: React.FC<createDecksType> = ({ callback }) => {
+export const DecksForm: React.FC<createDecksType> = ({
+  callback,
+  headerName,
+  forEditFlag,
+  id,
+}) => {
   const [createDeck, {}] = useCreateDeckMutation();
+  const [editDeck, {}] = useEditDeckMutation();
 
   const { handleSubmit, control } = useForm<createDecks>({
     resolver: zodResolver(loginSchema),
   });
 
   const handlerOnSubmit = (data: createDecks) => {
-    console.log(data);
+    if (!forEditFlag) {
+      createDeck({ name: data.name, isPrivate: data.isPrivate });
+    } else {
+      editDeck({ name: data.name, id });
+    }
     createDeck({ name: data.name, isPrivate: data.isPrivate })
       .unwrap()
       .then(() => {
         toast.success("Success");
+        callback();
       })
       .catch(() => {
         toast.error("Wrong login or password");
@@ -52,7 +69,7 @@ export const CreateDecksForm: React.FC<createDecksType> = ({ callback }) => {
     <form onSubmit={handleSubmit(handlerOnSubmit)}>
       <CardComponent className={st.common}>
         <div className={st.header}>
-          <Typography>Add new pack</Typography>
+          <Typography>{headerName}</Typography>
           <IconClose onClick={callback} />
         </div>
 
@@ -60,7 +77,7 @@ export const CreateDecksForm: React.FC<createDecksType> = ({ callback }) => {
           <ControlTextField
             sizeWidthTextField="484px"
             label="name pack"
-            placeholder="Create a deck"
+            placeholder={headerName === "Edit pack" ? "Edit" : "Create pack"}
             type="text"
             name="name"
             control={control}
@@ -76,7 +93,9 @@ export const CreateDecksForm: React.FC<createDecksType> = ({ callback }) => {
             <Typography variant={"body2"}>Cancel</Typography>
           </Button>
           <Button type={"submit"} className={st.but2}>
-            <Typography variant={"body2"}>Create</Typography>
+            <Typography variant={"body2"}>
+              {headerName === "Edit pack" ? "Edit" : "Create"}
+            </Typography>
           </Button>
         </div>
       </CardComponent>

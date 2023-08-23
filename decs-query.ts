@@ -26,7 +26,7 @@ type Items = {
   questionImg: string;
   questionVideo: string;
   answerVideo: string;
-  rating: number;
+  grade: number;
   created: string;
   updated: string;
 };
@@ -98,6 +98,16 @@ const extendedApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["Decks"],
       }),
+      editDeck: builder.mutation<any, { name: string; id: string }>({
+        query: (arg) => {
+          return {
+            url: `v1/decks/${arg.id}`,
+            method: "PATCH",
+            body: { name: arg.name },
+          };
+        },
+        invalidatesTags: ["Decks"],
+      }),
       createCard: builder.mutation<any, cardTypeArgs>({
         query: (arg) => {
           return {
@@ -116,6 +126,15 @@ const extendedApi = baseApi.injectEndpoints({
           };
         },
         invalidatesTags: ["Decks"],
+      }),
+      deleteCard: builder.mutation<void, string>({
+        query: (id) => {
+          return {
+            url: `/v1/cards/${id}`,
+            method: "DELETE",
+          };
+        },
+        invalidatesTags: ["Cards"],
       }),
       logIn: builder.mutation<any, FormValues>({
         query: (body) => {
@@ -160,4 +179,6 @@ export const {
   useGetCardsQuery,
   useCreateCardMutation,
   useGetCardsByIdQuery,
+  useEditDeckMutation,
+  useDeleteCardMutation,
 } = extendedApi;

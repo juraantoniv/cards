@@ -8,6 +8,8 @@ import { ArrowUpIcon } from "../../../assets/icons/arrowUpIcon.tsx";
 import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
+import { Delete } from "../../deletePopComponent/detete.tsx";
+import { DecksForm } from "../createDecks";
 import { PaginationSamurai } from "../paginationSamurai";
 
 import st from "./tableDecks.module.scss";
@@ -47,6 +49,10 @@ export const TableDecks = ({
 
   const { isLoading, data } = useGetDecksQuery();
 
+  const [show, setShow] = useState(false);
+  const [showForDelete, setShowForDelete] = useState(false);
+  const [id, setId] = useState("");
+
   const handlerSort = (key: string) => {
     if (key !== "action") {
       if (sort && sort.key === key) {
@@ -71,6 +77,20 @@ export const TableDecks = ({
         }
       }
     }
+  };
+
+  const beforeDeleteHandler = (id: string) => {
+    setId(id);
+    setShowForDelete(true);
+  };
+  const showEdit = (id: string) => {
+    setShow(true);
+    setId(id);
+  };
+
+  const deleteDecks = () => {
+    deleteItem(id);
+    setShowForDelete(false);
   };
 
   const toCardsHandler = (id: string) => {
@@ -105,21 +125,16 @@ export const TableDecks = ({
         <tbody>
           {dataContentTable?.map((item) => (
             <tr key={item.id} className={st.tr}>
-              <td
-                className={st.tdCommonStyle}
-                onClick={() => toCardsHandler(item.id)}
-              >
-                {item.name}{" "}
-              </td>
+              <td className={st.tdCommonStyle}>{item.name} </td>
               <td className={st.tdCommonStyle}>{item.cardsCount}</td>
               <td className={st.tdCommonStyle}>{item.updated}</td>
               <td className={st.tdCreatedBy}>{item.author.name}</td>
               <td className={st.tdIcons}>
-                <PlayIcon />
-                <EditIcon />
+                <PlayIcon onClick={() => toCardsHandler(item.id)} />
+                <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
                   style={{ cursor: "alias" }}
-                  onClick={() => deleteItem(item.id)}
+                  onClick={() => beforeDeleteHandler(item.id)}
                 />
               </td>
             </tr>
@@ -128,6 +143,24 @@ export const TableDecks = ({
       </table>
       <div style={{ marginTop: "20px" }}>
         <PaginationSamurai allElements={data?.pagination.totalItems} />
+        {show && (
+          <div className={st.s}>
+            <DecksForm
+              forEditFlag={true}
+              id={id}
+              callback={() => setShow(false)}
+              headerName={"Edit pack"}
+            />
+          </div>
+        )}
+        {showForDelete && (
+          <div className={st.s}>
+            <Delete
+              hide={() => setShowForDelete(false)}
+              callback={deleteDecks}
+            />
+          </div>
+        )}
       </div>
     </>
   );

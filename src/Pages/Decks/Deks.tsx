@@ -15,6 +15,7 @@ import { Button } from "../../components/ui/button";
 import {
   CreateDecksForm,
   createDecksForm,
+  DecksForm,
 } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
 import { Header } from "../../components/ui/header";
@@ -119,7 +120,11 @@ const Deks = () => {
         <TabPage />
         <div className={s.s}>
           {createDeckFlag && (
-            <CreateDecksForm callback={onChangeHandlerClose} />
+            <DecksForm
+              forEditFlag={false}
+              callback={onChangeHandlerClose}
+              headerName={"Add new pack"}
+            />
           )}
         </div>
 

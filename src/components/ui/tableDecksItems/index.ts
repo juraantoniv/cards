@@ -1,1 +1,1 @@
-export * from './tableDecks'
+export * from "./tableItems.tsx";
