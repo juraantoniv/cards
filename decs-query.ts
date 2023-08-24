@@ -45,7 +45,8 @@ export type carsdType = {
 
 type cardTypeArgs = {
   id: string;
-  name: string;
+  answer: string;
+  question: string;
 };
 
 const extendedApi = baseApi.injectEndpoints({
@@ -61,11 +62,15 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Decks"],
       }),
-      getCards: builder.query<carsdType, { id: string | undefined }>({
-        query: (id) => {
+      getCards: builder.query<
+        carsdType,
+        { question: string; id: string | undefined }
+      >({
+        query: (arg) => {
           return {
-            url: `/v1/decks/${id.id}/cards`,
+            url: `/v1/decks/${arg.id}/cards`,
             method: "GET",
+            params: { question: arg.question },
           };
         },
         providesTags: ["Cards"],
@@ -113,7 +118,7 @@ const extendedApi = baseApi.injectEndpoints({
           return {
             url: `/v1/decks/${arg.id}/cards`,
             method: "POST",
-            body: { question: arg.name, answer: "ygygyg" },
+            body: { question: arg.question, answer: arg.answer },
           };
         },
         invalidatesTags: ["Cards"],

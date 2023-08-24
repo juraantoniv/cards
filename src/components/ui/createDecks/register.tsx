@@ -21,15 +21,18 @@ import { Typography } from "../typography";
 import st from "./register.module.scss";
 
 const loginSchema = z.object({
-  name: z.string().min(3),
+  question: z.string().min(3),
+  answer: z.optional(z.string().min(3)),
   isPrivate: z.boolean().default(false),
 });
 
 type createDecksType = {
+  name?: string;
   callback: () => void;
   headerName?: string;
-  forEditFlag: boolean;
+  forEditFlag?: boolean;
   id?: string;
+  func?: (question: string, answer: string) => void;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
@@ -40,6 +43,8 @@ export const DecksForm: React.FC<createDecksType> = ({
   headerName,
   forEditFlag,
   id,
+  func,
+  name,
 }) => {
   const [createDeck, {}] = useCreateDeckMutation();
   const [editDeck, {}] = useEditDeckMutation();
@@ -49,9 +54,9 @@ export const DecksForm: React.FC<createDecksType> = ({
   });
 
   const handlerOnSubmit = (data: createDecks) => {
-    if (!forEditFlag) {
+    if (!forEditFlag && !func) {
       toast.info("Creating Decks");
-      createDeck({ name: data.name, isPrivate: data.isPrivate })
+      createDeck({ name: data.question, isPrivate: data.isPrivate })
         .unwrap()
         .then(() => {
           toast.success("Success");
@@ -60,8 +65,12 @@ export const DecksForm: React.FC<createDecksType> = ({
         .catch(() => {
           toast.error("Wrong login or password");
         });
+    } else if (forEditFlag) {
+      editDeck({ name: data.question, id });
     } else {
-      editDeck({ name: data.name, id });
+      func(data.question, data.answer);
+      toast.success("Created card");
+      callback();
     }
   };
 
@@ -76,17 +85,27 @@ export const DecksForm: React.FC<createDecksType> = ({
         <div className={st.centerCommonent}>
           <ControlTextField
             sizeWidthTextField="484px"
-            label="name pack"
-            placeholder={headerName === "Edit pack" ? "Edit" : "Create pack"}
+            label={!forEditFlag ? "Create" : func ? "Question" : "Create"}
             type="text"
-            name="name"
+            name="question"
             control={control}
           />
-          <ControlCheckbox2
-            label={"private pack"}
-            control={control}
-            name={"isPrivate"}
-          />
+          {func && (
+            <ControlTextField
+              sizeWidthTextField="484px"
+              label="answer"
+              type="text"
+              name="answer"
+              control={control}
+            />
+          )}
+          {!func && (
+            <ControlCheckbox2
+              label={"private pack"}
+              control={control}
+              name={"isPrivate"}
+            />
+          )}
         </div>
         <div className={st.button}>
           <Button className={st.but1} onClick={callback}>

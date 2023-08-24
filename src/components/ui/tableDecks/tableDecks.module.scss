@@ -1,5 +1,8 @@
 .table {
   border-collapse: collapse;
+
+  width: 100%;
+
   border-top: 1px solid var(--color-dark-500);
   border-right: 1px solid var(--color-dark-500);
   border-left: 1px solid var(--color-dark-500);
@@ -13,7 +16,7 @@
 .s {
   position: absolute;
   top: 120px;
-  right: 70%;
+  right: 25%;
 }
 
 .thHeader {

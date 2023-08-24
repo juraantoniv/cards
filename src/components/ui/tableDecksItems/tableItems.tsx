@@ -62,8 +62,6 @@ export const TableDecksItems = ({
     }
   };
 
-  console.log(dataContentTable?.items);
-
   const handler = (deckId: string) => {
     callback(deckId);
   };
@@ -106,7 +104,6 @@ export const TableDecksItems = ({
               />
             </td>
             <td className={st.tdIcons}>
-              <PlayIcon />
               <EditIcon />
               <DeleteIcon onClick={() => handler(item.id)} />
             </td>

@@ -21,7 +21,6 @@ export const TabPanel = ({ data, active, title }: PropsType) => {
   return (
     <Tabs.Root className={st.common}>
       <Typography variant={"body2"}>{title}</Typography>
-
       <Tabs.List>
         {data?.map((e: itemTabType) => {
           return (

@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -9,6 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.small_box {
+  padding-top: 35px;
 }
 
 .s {

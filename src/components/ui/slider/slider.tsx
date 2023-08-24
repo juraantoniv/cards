@@ -15,8 +15,6 @@ export const SliderBar = ({ startArrayValue, onValueCommit }: PropsType) => {
     setValue([event[0], event[1]]);
   };
 
-  console.log(value);
-
   const handlerOnValueCommit = () => {
     onValueCommit(value);
   };
@@ -25,9 +23,10 @@ export const SliderBar = ({ startArrayValue, onValueCommit }: PropsType) => {
     <div className={st.common}>
       <div className={st.value}>{value[0]}</div>
       <Slider.Root
+        name={"slider"}
         onValueCommit={handlerOnValueCommit}
-        min={startArrayValue[0]}
-        max={startArrayValue[1]}
+        min={0}
+        max={20}
         value={[value[0], value[1]]}
         onValueChange={handlerOnValueChange}
         className={st.SliderRoot}

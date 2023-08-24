@@ -13,11 +13,6 @@ const SliderPage = () => {
     dispatch(decksSlice.actions.setCardCount(count));
   };
 
-  const { isLoading, data } = useGetDecksQuery({
-    minCardsCount: `${countCards[0]}`,
-    maxCardsCount: `${countCards[1]}`,
-  });
-
   return (
     <>
       <SliderBar onValueCommit={sentCount} startArrayValue={countCards} />

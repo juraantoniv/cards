@@ -44,7 +44,7 @@ const Deks = () => {
     (state) => state.decksSlice.orderBy,
   );
 
-  const decks = useAppSelector((state) => state.decksSlice.decks);
+  const countCards = useAppSelector((state) => state.decksSlice.cardsCount);
 
   const sort = (sort: string) => {
     dispatch(decksSlice.actions.setSort(sort));
@@ -62,6 +62,8 @@ const Deks = () => {
     orderBy: `${orderBy}`,
     authorId: `${authorId}`,
     name: `${name}`,
+    minCardsCount: `${countCards[0]}`,
+    maxCardsCount: `${countCards[1]}`,
   });
 
   const [createDeck, {}] = useCreateDeckMutation();
@@ -82,6 +84,8 @@ const Deks = () => {
   // function onChangeHandler() {
   //   createDeck(name);
   // }
+
+  console.log(data.pagination.totalItems);
 
   const logOUT = () => {
     logOut();
@@ -113,10 +117,12 @@ const Deks = () => {
       />
 
       <div className={s.headerDeck}>
-        <TextField
-          value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
-        />
+        <div className={s.small_box}>
+          <TextField
+            value={name}
+            onChange={(e) => setName(e.currentTarget.value)}
+          />
+        </div>
         <TabPage />
         <div className={s.s}>
           {createDeckFlag && (
@@ -139,6 +145,7 @@ const Deks = () => {
             dataContentTable={data?.items}
             deleteItem={deleteDeck}
             dataHeadersTable={headerDecksItems}
+            totalItems={data?.pagination.totalItems}
           />
         }
       </table>

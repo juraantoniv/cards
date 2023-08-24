@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { PersonIcon, TrashIcon } from "@radix-ui/react-icons";
@@ -20,12 +20,14 @@ import s from "./drop-downComponent.module.scss";
 
 type DropdownProps = {
   arrItems: Array<string>;
-  data: meType;
+  data?: meType;
+  children?: ReactNode;
 };
 
 export const DropdownMenuComponent: React.FC<DropdownProps> = ({
   arrItems,
   data,
+  children,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -55,7 +57,7 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
     <DropdownMenu.Root open={open} onOpenChange={setState}>
       <DropdownMenu.Trigger asChild>
         <button className={s.IconButton} aria-label="Customise options">
-          <AvatarDemo />
+          {!children ? <AvatarDemo /> : children}
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>

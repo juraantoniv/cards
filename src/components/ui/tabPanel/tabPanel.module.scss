@@ -1,8 +1,10 @@
 .common {
-  height: 67px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  height: 87px;
+  padding-bottom: 22px;
 }
 
 .tabTrigger {

@@ -8,7 +8,7 @@ const initialState = {
   searchByName: "",
   orderBy: "created-desc",
   setLogIn: false,
-  cardsCount: [1, 20],
+  cardsCount: [0, 20],
   decks: {} as decksResponse,
   authorId: "",
 };

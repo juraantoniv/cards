@@ -33,6 +33,7 @@ type PropsType = {
   dataHeadersTable?: DataHeaderType[];
   sendDataToServer?: (value: string) => void;
   deleteItem: (id: string) => void;
+  totalItems: number;
 };
 type SortType = {
   key: string;
@@ -43,6 +44,7 @@ export const TableDecks = ({
   dataHeadersTable,
   sendDataToServer,
   deleteItem,
+  totalItems,
 }: PropsType) => {
   const [sort, setSort] = useState<SortType>(null);
   const navigate = useNavigate();
@@ -136,23 +138,24 @@ export const TableDecks = ({
                   style={{ cursor: "alias" }}
                   onClick={() => beforeDeleteHandler(item.id)}
                 />
+                {show && (
+                  <div className={st.s}>
+                    <DecksForm
+                      forEditFlag={true}
+                      id={id}
+                      callback={() => setShow(false)}
+                      headerName={"Edit pack"}
+                    />
+                  </div>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <div style={{ marginTop: "20px" }}>
-        <PaginationSamurai allElements={data?.pagination.totalItems} />
-        {show && (
-          <div className={st.s}>
-            <DecksForm
-              forEditFlag={true}
-              id={id}
-              callback={() => setShow(false)}
-              headerName={"Edit pack"}
-            />
-          </div>
-        )}
+        <PaginationSamurai allElements={totalItems} />
+
         {showForDelete && (
           <div className={st.s}>
             <Delete

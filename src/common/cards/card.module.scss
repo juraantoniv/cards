@@ -4,7 +4,36 @@
   align-content: center;
   justify-content: center;
 
-  margin-top: 150px;
+  margin-top: 100px;
+}
+
+.form {
+  position: absolute;
+  top: 60px;
+  left: 35%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100px;
+  margin: 10px 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px 0;
 }
 
 .show {
