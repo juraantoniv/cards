@@ -58,7 +58,7 @@ export const Login = () => {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+          theme="dark"
         />
         <Typography className={st.singIn} variant="large">
           Sing In

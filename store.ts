@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { baseApi } from "./base-api.tsx";
+import { save } from "./src/services/localStoregeServices.ts";
 import { decksSlice } from "./src/services/store.ts";
 
 export const store = configureStore({
@@ -17,3 +18,9 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+store.subscribe(() => {
+  const logIn = store.getState().decksSlice.setLogIn;
+
+  save(logIn);
+});

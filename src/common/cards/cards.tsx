@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { navigate } from "@storybook/addon-links";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -9,12 +8,9 @@ import {
   useDeleteCardMutation,
   useDeleteDeckMutation,
   useGetCardsQuery,
-  useLazyGetCardsQuery,
   useLazyGetDecksQuery,
 } from "../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
-import IconDots from "../../assets/icons/iconDots.tsx";
-import IconDotsVerticalCircleOutline from "../../assets/icons/iconDots.tsx";
 import IconDotsVerticalCircle from "../../assets/icons/iconDots.tsx";
 import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
 import { Delete } from "../../components/deletePopComponent/detete.tsx";
@@ -155,7 +151,7 @@ const Cards = () => {
         <div className={s.box}>
           <div className={s.header}>
             <div>
-              <Typography variant={"body2"}>{lasyFunc}</Typography>
+              <Typography variant={"body2"}>{deckName}</Typography>
             </div>
             <DropdownMenuComponent arrItems={["Learn", "Edit", "Delete"]}>
               <IconDotsVerticalCircle />

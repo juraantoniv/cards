@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { useMeQuery } from "../../../../decs-query";
-import { useAppSelector } from "../../../../store.ts";
+import { loadBoolean } from "../../../services/localStoregeServices.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
 
@@ -20,15 +20,13 @@ export type meType = {
 const MainLayout = () => {
   const navigate = useNavigate();
 
-  const setLogIn = useAppSelector((state) => state.decksSlice.setLogIn);
+  const setLogIn = loadBoolean();
 
   const { data } = useMeQuery();
 
   const logIN = () => {
     navigate("/login");
   };
-
-  console.log(setLogIn);
 
   return (
     <div

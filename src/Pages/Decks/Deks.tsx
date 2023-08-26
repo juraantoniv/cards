@@ -19,6 +19,7 @@ import {
 } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
 import { Header } from "../../components/ui/header";
+import { NotFoundPage } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecks } from "../../components/ui/tableDecks";
 import { TabPanel } from "../../components/ui/tabPanel";
 import { TextField } from "../../components/ui/textField/textField.tsx";
@@ -44,6 +45,8 @@ const Deks = () => {
     (state) => state.decksSlice.orderBy,
   );
 
+  const setLogIn = useAppSelector((state) => state.decksSlice.setLogIn);
+
   const countCards = useAppSelector((state) => state.decksSlice.cardsCount);
 
   const sort = (sort: string) => {
@@ -66,11 +69,8 @@ const Deks = () => {
     maxCardsCount: `${countCards[1]}`,
   });
 
-  const [createDeck, {}] = useCreateDeckMutation();
-
   const [logOut, {}] = useLogOutMutation();
   const [delDeck, {}] = useDeleteDeckMutation();
-  const navigate = useNavigate();
 
   function onChangeHandler() {
     setCreateDeckFlag(true);

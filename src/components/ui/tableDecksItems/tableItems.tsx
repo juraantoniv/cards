@@ -23,7 +23,7 @@ type DataHeaderType = {
   title: string;
 };
 type PropsType = {
-  dataContentTable: carsdType;
+  dataContentTable: carsdType | undefined;
   dataHeadersTable?: DataHeaderType[];
   sendDataToServer?: (value: string) => void;
   callback: (id: string) => void;
