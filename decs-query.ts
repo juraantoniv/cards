@@ -70,19 +70,9 @@ const extendedApi = baseApi.injectEndpoints({
           return {
             url: `/v1/decks/${arg.id}/cards`,
             method: "GET",
-            params: { question: arg.question },
           };
         },
         providesTags: ["Cards"],
-      }),
-      getCardsById: builder.query<decksResponse, string>({
-        query: (id) => {
-          return {
-            url: `/v1/decks/`,
-            method: "GET",
-            body: { authorId: id },
-          };
-        },
       }),
       me: builder.query<meType, void>({
         query: () => {
@@ -123,6 +113,16 @@ const extendedApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["Cards"],
       }),
+      editCard: builder.mutation<any, cardTypeArgs>({
+        query: (arg) => {
+          return {
+            url: `/v1/cards/${arg.id}`,
+            method: "PATCH",
+            body: { question: arg.question, answer: arg.answer },
+          };
+        },
+        invalidatesTags: ["Cards"],
+      }),
       deleteDeck: builder.mutation<void, string>({
         query: (id) => {
           return {
@@ -130,7 +130,7 @@ const extendedApi = baseApi.injectEndpoints({
             method: "DELETE",
           };
         },
-        invalidatesTags: ["Decks"],
+        invalidatesTags: ["Decks", "Cards"],
       }),
       deleteCard: builder.mutation<void, string>({
         query: (id) => {
@@ -183,7 +183,8 @@ export const {
   useMeQuery,
   useGetCardsQuery,
   useCreateCardMutation,
-  useGetCardsByIdQuery,
   useEditDeckMutation,
   useDeleteCardMutation,
+  useEditCardMutation,
+  useLazyGetCardsQuery,
 } = extendedApi;

@@ -9,7 +9,9 @@ import { z } from "zod";
 
 import {
   useCreateDeckMutation,
+  useEditCardMutation,
   useEditDeckMutation,
+  useLazyGetDecksQuery,
 } from "../../../../decs-query.ts";
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
@@ -33,6 +35,7 @@ type createDecksType = {
   forEditFlag?: boolean;
   id?: string;
   func?: (question: string, answer: string) => void;
+  editModeCard?: boolean;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
@@ -45,7 +48,9 @@ export const DecksForm: React.FC<createDecksType> = ({
   id,
   func,
   name,
+  editModeCard,
 }) => {
+  const [editCard, {}] = useEditCardMutation();
   const [createDeck, {}] = useCreateDeckMutation();
   const [editDeck, {}] = useEditDeckMutation();
 
@@ -53,8 +58,10 @@ export const DecksForm: React.FC<createDecksType> = ({
     resolver: zodResolver(loginSchema),
   });
 
+  const [lasyFunc] = useLazyGetDecksQuery();
+
   const handlerOnSubmit = (data: createDecks) => {
-    if (!forEditFlag && !func) {
+    if (!forEditFlag && !func && !editModeCard) {
       toast.info("Creating Decks");
       createDeck({ name: data.question, isPrivate: data.isPrivate })
         .unwrap()
@@ -67,6 +74,10 @@ export const DecksForm: React.FC<createDecksType> = ({
         });
     } else if (forEditFlag) {
       editDeck({ name: data.question, id });
+      lasyFunc();
+    } else if (editModeCard) {
+      editCard({ id: id, question: data.question, answer: data.answer });
+      toast.success("Success");
     } else {
       func(data.question, data.answer);
       toast.success("Created card");
@@ -90,7 +101,7 @@ export const DecksForm: React.FC<createDecksType> = ({
             name="question"
             control={control}
           />
-          {func && (
+          {(func || editModeCard) && (
             <ControlTextField
               sizeWidthTextField="484px"
               label="answer"

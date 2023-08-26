@@ -53,6 +53,18 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
 
   const handler = () => {};
 
+  const editMode = () => {
+    dispatch(decksSlice.actions.editMode(true));
+  };
+
+  const delMode = () => {
+    dispatch(decksSlice.actions.showDeleteForm(true));
+  };
+
+  const leenMode = () => {};
+
+  const nonFunc = () => {};
+
   return (
     <DropdownMenu.Root open={open} onOpenChange={setState}>
       <DropdownMenu.Trigger asChild>
@@ -94,7 +106,19 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
                 )}
                 <DropdownMenu.Item
                   className={s.DropdownMenuItem}
-                  onClick={e === "Sign Out" ? signOut : toProfilePage}
+                  onClick={
+                    e === "Sign Out"
+                      ? signOut
+                      : e === "My Profile"
+                      ? toProfilePage
+                      : e === "Edit"
+                      ? editMode
+                      : e === "Delete"
+                      ? delMode
+                      : e === "Learn"
+                      ? leenMode
+                      : nonFunc
+                  }
                 >
                   {e === "Sign Out" ? (
                     <Logout style={{ margin: "5px" }} />

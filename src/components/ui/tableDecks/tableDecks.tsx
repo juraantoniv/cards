@@ -3,11 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useGetDecksQuery } from "../../../../decs-query.ts";
+import { useAppDispatch } from "../../../../store.ts";
 import { ArrowIconDown } from "../../../assets/icons/arrowIconDown.tsx";
 import { ArrowUpIcon } from "../../../assets/icons/arrowUpIcon.tsx";
 import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
+import { decksSlice } from "../../../services/store.ts";
 import { Delete } from "../../deletePopComponent/detete.tsx";
 import { DecksForm } from "../createDecks";
 import { PaginationSamurai } from "../paginationSamurai";
@@ -48,8 +50,7 @@ export const TableDecks = ({
 }: PropsType) => {
   const [sort, setSort] = useState<SortType>(null);
   const navigate = useNavigate();
-
-  const { isLoading, data } = useGetDecksQuery();
+  const dispatch = useAppDispatch();
 
   const [show, setShow] = useState(false);
   const [showForDelete, setShowForDelete] = useState(false);
@@ -81,7 +82,7 @@ export const TableDecks = ({
     }
   };
 
-  const beforeDeleteHandler = (id: string) => {
+  const beforeDeleteHandler = (id: string, name: string) => {
     setId(id);
     setShowForDelete(true);
   };
@@ -95,7 +96,8 @@ export const TableDecks = ({
     setShowForDelete(false);
   };
 
-  const toCardsHandler = (id: string) => {
+  const toCardsHandler = (id: string, name: string) => {
+    dispatch(decksSlice.actions.getName(name));
     navigate(`${id}`);
   };
 
@@ -132,7 +134,7 @@ export const TableDecks = ({
               <td className={st.tdCommonStyle}>{item.updated}</td>
               <td className={st.tdCreatedBy}>{item.author.name}</td>
               <td className={st.tdIcons}>
-                <PlayIcon onClick={() => toCardsHandler(item.id)} />
+                <PlayIcon onClick={() => toCardsHandler(item.id, item.name)} />
                 <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
                   style={{ cursor: "alias" }}

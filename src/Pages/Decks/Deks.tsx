@@ -85,8 +85,6 @@ const Deks = () => {
   //   createDeck(name);
   // }
 
-  console.log(data.pagination.totalItems);
-
   const logOUT = () => {
     logOut();
     dispatch(decksSlice.actions.setLogIn(false));

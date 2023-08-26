@@ -27,6 +27,7 @@ type PropsType = {
   dataHeadersTable?: DataHeaderType[];
   sendDataToServer?: (value: string) => void;
   callback: (id: string) => void;
+  for_editCallback: (id: string) => void;
 };
 type SortType = {
   key: string;
@@ -37,6 +38,7 @@ export const TableDecksItems = ({
   dataHeadersTable,
   sendDataToServer,
   callback,
+  for_editCallback,
 }: PropsType) => {
   const [sort, setSort] = useState<SortType>(null);
   const handlerSort = (key: string) => {
@@ -64,6 +66,10 @@ export const TableDecksItems = ({
 
   const handler = (deckId: string) => {
     callback(deckId);
+  };
+
+  const OnChangeEditHandler = (deckId: string) => {
+    for_editCallback(deckId);
   };
 
   return (
@@ -104,7 +110,7 @@ export const TableDecksItems = ({
               />
             </td>
             <td className={st.tdIcons}>
-              <EditIcon />
+              <EditIcon onClick={() => OnChangeEditHandler(item.id)} />
               <DeleteIcon onClick={() => handler(item.id)} />
             </td>
           </tr>

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 
 import { decksResponse } from "../../types.ts";
 
@@ -11,6 +11,9 @@ const initialState = {
   cardsCount: [0, 20],
   decks: {} as decksResponse,
   authorId: "",
+  name: "",
+  showDeleteForm: false,
+  editMode: false,
 };
 
 export const decksSlice = createSlice({
@@ -37,6 +40,15 @@ export const decksSlice = createSlice({
     },
     setAuthorId: (state, action: PayloadAction<string>) => {
       state.authorId = action.payload;
+    },
+    getName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
+    showDeleteForm: (state, action: PayloadAction<boolean>) => {
+      state.showDeleteForm = action.payload;
+    },
+    editMode: (state, action: PayloadAction<boolean>) => {
+      state.editMode = action.payload;
     },
     getDecks: (
       state,

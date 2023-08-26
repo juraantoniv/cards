@@ -112,14 +112,12 @@ export const PaginationSamurai = ({ allElements }: PropsType) => {
       </div>
 
       <div className={st.blockSeleckWithWords}>
-        Показать
         <SelectControl
           onValueChange={handlerOnValueChange}
           headerSelector={headerSelector}
           widthBlockSelector={widthBlockSelector}
           stateSelectItems={stateSelectItems}
         />
-        на странице
       </div>
     </div>
   );
