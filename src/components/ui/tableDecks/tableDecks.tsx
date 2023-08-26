@@ -131,14 +131,16 @@ export const TableDecks = ({
             <tr key={item.id} className={st.tr}>
               <td className={st.tdCommonStyle}>{item.name} </td>
               <td className={st.tdCommonStyle}>{item.cardsCount}</td>
-              <td className={st.tdCommonStyle}>{item.updated}</td>
+              <td className={st.tdCommonStyle}>
+                {new Date(item?.updated).toLocaleString("eu-EU")}
+              </td>
               <td className={st.tdCreatedBy}>{item.author.name}</td>
               <td className={st.tdIcons}>
                 <PlayIcon onClick={() => toCardsHandler(item.id, item.name)} />
                 <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
                   style={{ cursor: "alias" }}
-                  onClick={() => beforeDeleteHandler(item.id)}
+                  onClick={() => beforeDeleteHandler(item.id, item.name)}
                 />
                 {show && (
                   <div className={st.s}>
