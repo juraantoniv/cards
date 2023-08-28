@@ -1,9 +1,11 @@
 import React from "react";
 
+import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { useMeQuery } from "../../../../decs-query";
+import { useLogInMutation, useMeQuery } from "../../../../decs-query";
+import { useAppSelector } from "../../../../store.ts";
 import { loadBoolean } from "../../../services/localStoregeServices.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
@@ -20,30 +22,34 @@ export type meType = {
 const MainLayout = () => {
   const navigate = useNavigate();
 
-  const setLogIn = loadBoolean();
-
-  const { data } = useMeQuery();
+  const { data, isLoading } = useMeQuery();
 
   const logIN = () => {
     navigate("/login");
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Header name={data?.name} logIn={setLogIn} callback={logIN}>
-        <DropdownMenuComponent
-          data={data}
-          arrItems={["My Profile", "Sign Out"]}
-        />
-      </Header>
+    <div>
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Header name={data?.name} logIn={!!data} callback={logIN}>
+            <DropdownMenuComponent
+              data={data}
+              arrItems={["My Profile", "Sign Out"]}
+            />
+          </Header>
 
-      <Outlet />
+          <Outlet />
+        </div>
+      )}
     </div>
   );
 };

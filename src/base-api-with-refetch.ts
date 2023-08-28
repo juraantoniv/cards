@@ -43,7 +43,6 @@ export const customFetchBase: BaseQueryFn<
         );
 
         if (refreshResult?.meta?.response?.status === 204) {
-          // Retry the initial query
           result = await baseQuery(args, api, extraOptions);
         }
       } finally {

@@ -4,7 +4,7 @@ import { customFetchBase } from "./src/base-api-with-refetch.ts";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  tagTypes: ["Decks", "Cards"],
+  tagTypes: ["Decks", "Cards", "logOut"],
   baseQuery: customFetchBase,
   endpoints: (builder) => ({}),
 });

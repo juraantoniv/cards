@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -23,6 +24,7 @@ import { NotFoundPage } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecks } from "../../components/ui/tableDecks";
 import { TabPanel } from "../../components/ui/tabPanel";
 import { TextField } from "../../components/ui/textField/textField.tsx";
+import { loadBoolean } from "../../services/localStoregeServices.ts";
 import { decksSlice } from "../../services/store.ts";
 import SliderPage from "../sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";
@@ -40,12 +42,11 @@ const Deks = () => {
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.decksSlice.currentPage);
   const authorId = useAppSelector((state) => state.decksSlice.authorId);
+  const load = useAppSelector((state) => state.decksSlice.isLoading);
 
   const orderBy: decksResponse = useAppSelector(
     (state) => state.decksSlice.orderBy,
   );
-
-  const setLogIn = useAppSelector((state) => state.decksSlice.setLogIn);
 
   const countCards = useAppSelector((state) => state.decksSlice.cardsCount);
 
@@ -59,7 +60,7 @@ const Deks = () => {
   const itemsPerPage: number = useAppSelector(
     (state) => state.decksSlice.itemsPerPage,
   );
-  const { data } = useGetDecksQuery({
+  const { data, isLoading } = useGetDecksQuery({
     currentPage: `${page}`,
     itemsPerPage: `${itemsPerPage}`,
     orderBy: `${orderBy}`,
@@ -87,7 +88,6 @@ const Deks = () => {
 
   const logOUT = () => {
     logOut();
-    dispatch(decksSlice.actions.setLogIn(false));
   };
 
   const deleteDeck = (id: string) => {
@@ -100,7 +100,7 @@ const Deks = () => {
   };
 
   return (
-    <div style={{ paddingTop: 200 }}>
+    <div className={s.box}>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -136,8 +136,10 @@ const Deks = () => {
         <Button onClick={onChangeHandler}>Create a deck</Button>
       </div>
 
-      <table>
-        {
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <table>
           <TableDecks
             sendDataToServer={sort}
             dataContentTable={data?.items}
@@ -145,8 +147,8 @@ const Deks = () => {
             dataHeadersTable={headerDecksItems}
             totalItems={data?.pagination.totalItems}
           />
-        }
-      </table>
+        </table>
+      )}
     </div>
   );
 };

@@ -19,8 +19,8 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-store.subscribe(() => {
-  const logIn = store.getState().decksSlice.setLogIn;
-
-  save(logIn);
-});
+// store.subscribe(() => {
+//   const logIn = store.getState().decksSlice.setLogIn;
+//
+//   save(logIn);
+// });

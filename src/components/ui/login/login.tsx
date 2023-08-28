@@ -24,9 +24,9 @@ const loginSchema = z.object({
 
 type FormLoginType = z.infer<typeof loginSchema>;
 export const Login = () => {
-  const dispatch = useAppDispatch();
   const [logIn, {}] = useLogInMutation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { handleSubmit, control } = useForm<FormLoginType>({
     resolver: zodResolver(loginSchema),
@@ -37,7 +37,7 @@ export const Login = () => {
       .unwrap()
       .then(() => {
         toast.success("Success");
-        dispatch(decksSlice.actions.setLogIn(true));
+        dispatch(decksSlice.actions.loadDecks(false));
         navigate("/");
       })
       .catch(() => {

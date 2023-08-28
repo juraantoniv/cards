@@ -4,7 +4,6 @@ import { clsx } from "clsx";
 import { ToastContainer } from "react-toastify";
 
 import { Button } from "../button";
-import { meType } from "../layout/MainLayout.tsx";
 import { Typography } from "../typography";
 
 import s from "./header.module.scss";
@@ -20,6 +19,7 @@ export type HeaderProps = {
 export const Header: FC<HeaderProps> = ({
   children,
   className,
+  logIn,
   name,
 
   ...rest
@@ -28,11 +28,13 @@ export const Header: FC<HeaderProps> = ({
     header: clsx(s.header, className),
   };
 
+  console.log(logIn);
+
   return (
     <>
       <header className={classNames.header} {...rest}>
         <img src={im} alt={"logo"}></img>
-        {rest.logIn ? (
+        {logIn ? (
           <div style={{ display: "flex" }}>
             {name && (
               <Typography variant={"h1"} style={{ marginRight: 25 }}>
@@ -42,9 +44,7 @@ export const Header: FC<HeaderProps> = ({
             {children}
           </div>
         ) : (
-          <Button onClick={rest.callback}>
-            {rest.logIn ? "Log Out" : "Log In"}
-          </Button>
+          <Button onClick={rest.callback}>Log In</Button>
         )}
       </header>
     </>

@@ -3,6 +3,7 @@ import * as child_process from "child_process";
 import { baseApi } from "./base-api";
 import { FormValues } from "./src/components/ui/auth/login-form/login-from.tsx";
 import { meType } from "./src/components/ui/layout/MainLayout.tsx";
+import { decksSlice } from "./src/services/store.ts";
 import { FormValuesReg } from "./src/userRegisterForm.tsx";
 import { decksResponse, userRegisterType } from "./types.ts";
 
@@ -42,7 +43,24 @@ export type carsdType = {
   items: Items[];
   pagination: Pagination;
 };
+export type Author = {
+  id: string;
+  name: string;
+};
 
+export type userDecks = {
+  author: Author;
+  id: string;
+  userId: string;
+  name: string;
+  isPrivate: boolean;
+  shots: number;
+  cover: string;
+  rating: number;
+  created: string;
+  updated: string;
+  cardsCount: number;
+};
 type cardTypeArgs = {
   id: string;
   answer: string;
@@ -61,6 +79,14 @@ const extendedApi = baseApi.injectEndpoints({
           };
         },
         providesTags: ["Decks"],
+      }),
+      getDecksById: builder.query<userDecks, { id: string }>({
+        query: (arg) => {
+          return {
+            url: `/v1/decks/${arg.id}`,
+            method: "GET",
+          };
+        },
       }),
       getCards: builder.query<
         carsdType,
@@ -158,6 +184,25 @@ const extendedApi = baseApi.injectEndpoints({
             method: "POST",
           };
         },
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(
+            baseApi.util.updateQueryData("me", undefined, () => {
+              return null;
+            }),
+          );
+
+          try {
+            await queryFulfilled;
+          } catch {
+            patchResult.undo();
+
+            /**
+             * Alternatively, on failure you can invalidate the corresponding cache tags
+             * to trigger a re-fetch:
+             * dispatch(api.util.invalidateTags(['Post']))
+             */
+          }
+        },
       }),
       createUser: builder.mutation<any, FormValuesReg>({
         query: (user) => {
@@ -187,4 +232,6 @@ export const {
   useDeleteCardMutation,
   useEditCardMutation,
   useLazyGetCardsQuery,
+  useLazyMeQuery,
+  useGetDecksByIdQuery,
 } = extendedApi;

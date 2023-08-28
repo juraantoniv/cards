@@ -96,8 +96,7 @@ export const TableDecks = ({
     setShowForDelete(false);
   };
 
-  const toCardsHandler = (id: string, name: string) => {
-    dispatch(decksSlice.actions.getName(name));
+  const toCardsHandler = (id: string) => {
     navigate(`${id}`);
   };
 
@@ -136,7 +135,7 @@ export const TableDecks = ({
               </td>
               <td className={st.tdCreatedBy}>{item.author.name}</td>
               <td className={st.tdIcons}>
-                <PlayIcon onClick={() => toCardsHandler(item.id, item.name)} />
+                <PlayIcon onClick={() => toCardsHandler(item.id)} />
                 <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
                   style={{ cursor: "alias" }}
@@ -161,7 +160,7 @@ export const TableDecks = ({
         <PaginationSamurai allElements={totalItems} />
 
         {showForDelete && (
-          <div className={st.s}>
+          <div className={st.del}>
             <Delete
               hide={() => setShowForDelete(false)}
               callback={deleteDecks}

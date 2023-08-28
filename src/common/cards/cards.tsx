@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -8,6 +9,7 @@ import {
   useDeleteCardMutation,
   useDeleteDeckMutation,
   useGetCardsQuery,
+  useGetDecksByIdQuery,
   useLazyGetDecksQuery,
 } from "../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
@@ -17,7 +19,10 @@ import { Delete } from "../../components/deletePopComponent/detete.tsx";
 import { Button } from "../../components/ui/button";
 import { DecksForm } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
-import { NotFoundPage } from "../../components/ui/notFound/notFoundPage.tsx";
+import {
+  Memo,
+  NotFoundPage,
+} from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecksItems } from "../../components/ui/tableDecksItems";
 import { TextField } from "../../components/ui/textField";
 import { Typography } from "../../components/ui/typography";
@@ -37,16 +42,19 @@ const headerDecksItems = [
 const Cards = () => {
   const { id } = useParams();
   const [name, setName] = useState("");
-  const deckName = useAppSelector((state) => state.decksSlice.name);
   const dispatch = useAppDispatch();
   const showDeleteForm = useAppSelector(
     (state) => state.decksSlice.showDeleteForm,
   );
 
   const editForm = useAppSelector((state) => state.decksSlice.editMode);
-  const { data } = useGetCardsQuery({
+  const { data, isLoading } = useGetCardsQuery({
     id: id,
     question: `${name}`,
+  });
+
+  const { data: deckName } = useGetDecksByIdQuery({
+    id: `${id}`,
   });
 
   const [createCard, {}] = useCreateCardMutation();
@@ -97,6 +105,14 @@ const Cards = () => {
 
   const [lasyFunc] = useLazyGetDecksQuery();
 
+  if (isLoading) {
+    return (
+      <div style={{ marginTop: "300px" }}>
+        <LinearProgress />
+      </div>
+    );
+  }
+
   const forEditHandler = (id: string) => {
     showEdit(true);
     setCardId(id);
@@ -120,6 +136,8 @@ const Cards = () => {
 
     dispatch(decksSlice.actions.showDeleteForm(false));
   };
+
+  console.log(DeckName);
 
   return (
     <div className={s.card}>
@@ -151,7 +169,7 @@ const Cards = () => {
         <div className={s.box}>
           <div className={s.header}>
             <div>
-              <Typography variant={"body2"}>{deckName}</Typography>
+              <Typography variant={"body2"}>{deckName?.name}</Typography>
             </div>
             <DropdownMenuComponent arrItems={["Learn", "Edit", "Delete"]}>
               <IconDotsVerticalCircle />
@@ -180,7 +198,7 @@ const Cards = () => {
           for_editCallback={forEditHandler}
         />
       ) : (
-        <NotFoundPage />
+        <Memo style={{ width: "100%", height: "400px" }} />
       )}
       {form && (
         <div className={s.form}>

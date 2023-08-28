@@ -7,7 +7,7 @@ const initialState = {
   currentPage: 1,
   searchByName: "",
   orderBy: "created-desc",
-  setLogIn: false,
+  isLoading: true,
   cardsCount: [0, 20],
   decks: {} as decksResponse,
   authorId: "",
@@ -29,8 +29,8 @@ export const decksSlice = createSlice({
     setSearchByName: (state, action: PayloadAction<string>) => {
       state.searchByName = action.payload;
     },
-    setLogIn: (state, action: PayloadAction<boolean>) => {
-      state.setLogIn = action.payload;
+    loadDecks: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
     setSort: (state, action: PayloadAction<string>) => {
       state.orderBy = action.payload;

@@ -4,11 +4,12 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { PersonIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
-import { useLogOutMutation } from "../../../../decs-query.ts";
+import { useLazyMeQuery, useLogOutMutation } from "../../../../decs-query.ts";
 import { useAppDispatch } from "../../../../store.ts";
 import { IconEdit } from "../../../assets/icons/iconEdit.tsx";
 import { Logout } from "../../../assets/icons/iconLogOut.tsx";
 import IconPlayCircle from "../../../assets/icons/LearnIcon.tsx";
+import { loadBoolean } from "../../../services/localStoregeServices.ts";
 import { decksSlice } from "../../../services/store.ts";
 import { AvatarDemo } from "../avatar/avatar.tsx";
 import { meType } from "../layout/MainLayout.tsx";
@@ -44,7 +45,6 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
   const signOut = () => {
     logOut();
     navigate("/login");
-    dispatch(decksSlice.actions.setLogIn(false));
   };
 
   const toProfilePage = () => {
