@@ -105,14 +105,6 @@ const Cards = () => {
 
   const [lasyFunc] = useLazyGetDecksQuery();
 
-  if (isLoading) {
-    return (
-      <div style={{ marginTop: "300px" }}>
-        <LinearProgress />
-      </div>
-    );
-  }
-
   const forEditHandler = (id: string) => {
     showEdit(true);
     setCardId(id);
@@ -136,8 +128,6 @@ const Cards = () => {
 
     dispatch(decksSlice.actions.showDeleteForm(false));
   };
-
-  console.log(DeckName);
 
   return (
     <div className={s.card}>
@@ -190,7 +180,9 @@ const Cards = () => {
       </div>
 
       <div></div>
-      {data?.items?.length > 0 ? (
+      {isLoading ? (
+        <LinearProgress />
+      ) : data?.items?.length > 0 ? (
         <TableDecksItems
           dataContentTable={data}
           callback={ShowItem}
