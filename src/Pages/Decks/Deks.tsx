@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -9,6 +9,7 @@ import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useLogOutMutation,
+  useMeQuery,
 } from "../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
 import { decksResponse } from "../../../types.ts";
@@ -20,6 +21,7 @@ import {
 } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
 import { Header } from "../../components/ui/header";
+import { Login } from "../../components/ui/login";
 import { NotFoundPage } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecks } from "../../components/ui/tableDecks";
 import { TabPanel } from "../../components/ui/tabPanel";
@@ -43,6 +45,8 @@ const Deks = () => {
   const page = useAppSelector((state) => state.decksSlice.currentPage);
   const authorId = useAppSelector((state) => state.decksSlice.authorId);
   const load = useAppSelector((state) => state.decksSlice.isLoading);
+
+  const { data: LogOutData } = useMeQuery();
 
   const orderBy: decksResponse = useAppSelector(
     (state) => state.decksSlice.orderBy,
@@ -98,6 +102,10 @@ const Deks = () => {
         toast.success("Deleted");
       });
   };
+
+  if (!LogOutData) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <div className={s.box}>

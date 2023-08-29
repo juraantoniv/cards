@@ -87,6 +87,7 @@ const extendedApi = baseApi.injectEndpoints({
             method: "GET",
           };
         },
+        providesTags: ["getName"],
       }),
       getCards: builder.query<
         carsdType,
@@ -127,7 +128,7 @@ const extendedApi = baseApi.injectEndpoints({
             body: { name: arg.name },
           };
         },
-        invalidatesTags: ["Decks"],
+        invalidatesTags: ["getName"],
       }),
       createCard: builder.mutation<any, cardTypeArgs>({
         query: (arg) => {

@@ -50,12 +50,14 @@ const MainLayout = () => {
             />
           </Header>
 
-          {!data ? <Login /> : <Outlet />}
-          {location.pathname.endsWith("/register") ? (
-            <div style={{ position: "absolute", left: "34%" }}>
-              <Outlet />
-            </div>
-          ) : null}
+          {/*{!data ? <Login /> : <Outlet />}*/}
+          {/*{location.pathname.endsWith("/register") ? (*/}
+          {/*  <div style={{ position: "absolute", left: "39%" }}>*/}
+          {/*    <Outlet />*/}
+          {/*  </div>*/}
+          {/*) : null}*/}
+
+          <Outlet />
         </div>
       )}
     </div>

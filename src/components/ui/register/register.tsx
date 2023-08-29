@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { omit } from "remeda";
 import { z } from "zod";
 
@@ -30,6 +31,13 @@ const loginSchema = z
     return data;
   });
 
+export type errorType = {
+  data: {
+    errorMessages: Array<string>;
+  };
+  status: number;
+};
+
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
 
 type FormLoginType = z.infer<typeof loginSchema>;
@@ -48,13 +56,33 @@ export const Register = () => {
   });
 
   const handlerOnSubmit = (data: FormLoginType) => {
-    console.log(data);
-    setUser(omit(data, ["confirmPassword"]));
+    setUser(omit(data, ["confirmPassword"]))
+      .unwrap()
+      .then(() => {
+        toast.success("Success registration. Please login");
+      })
+      .catch((e: errorType) => {
+        e.data.errorMessages.forEach((e) => {
+          toast.error(`${e}`);
+        });
+      });
   };
 
   return (
     <form onSubmit={handleSubmit(handlerOnSubmit)}>
       <CardComponent className={st.common}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Typography className={st.singIn} variant="large">
           Sing In
         </Typography>
