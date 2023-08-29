@@ -1,9 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
+import { useRecoveryPasswordMutation } from "../../../../decs-query.ts";
+import { useAppDispatch } from "../../../../store.ts";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
+import { decksSlice } from "../../../services/store.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";
@@ -16,13 +19,20 @@ const forgotYourPasswordSchema = z.object({
 
 type FormForgotYourPasswordType = z.infer<typeof forgotYourPasswordSchema>;
 export const ForgotYourPassword = () => {
+  const dispatch = useAppDispatch();
+
   const { handleSubmit, control } = useForm<FormForgotYourPasswordType>({
     resolver: zodResolver(forgotYourPasswordSchema),
   });
 
-  console.log("yes");
+  const [recovery, {}] = useRecoveryPasswordMutation();
+
+  const navigate = useNavigate();
+
   const handlerOnSubmit = (data: any) => {
-    console.log(data);
+    recovery(data.email);
+    dispatch(decksSlice.actions.getName(data.email));
+    navigate("/checkEmail");
   };
 
   return (
@@ -42,7 +52,7 @@ export const ForgotYourPassword = () => {
         <Typography className={st.text} variant="body2">
           Enter your email address and we will send you further instructions
         </Typography>
-        <Button className={st.button} fullWidth={true}>
+        <Button className={st.button} type={"submit"} fullWidth={true}>
           Send Instructions
         </Button>
         <Typography className={st.question} variant="body2">

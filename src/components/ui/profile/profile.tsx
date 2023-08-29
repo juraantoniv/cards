@@ -2,6 +2,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import { useLogOutMutation } from "../../../../decs-query.ts";
 import iconUser from "../../../../src/assets/icons/iconUser.png";
 import { IconEdit } from "../../../assets/icons/iconEdit.tsx";
 import { Logout } from "../../../assets/icons/iconLogOut.tsx";
@@ -18,7 +19,10 @@ type ProfileProps = {
 
 export const Profile: React.FC<ProfileProps> = ({ name, email }) => {
   const navigate = useNavigate();
+
+  const [logOut, {}] = useLogOutMutation();
   const handlerOnClick = () => {
+    logOut();
     navigate("/login");
   };
   const handlerOnClickEditAvatar = () => {

@@ -84,16 +84,6 @@ const Deks = () => {
     setCreateDeckFlag(false);
   };
 
-  // const [initializeQuery, { isLoading, data }] = useLazyGetDecksQuery();
-
-  // function onChangeHandler() {
-  //   createDeck(name);
-  // }
-
-  const logOUT = () => {
-    logOut();
-  };
-
   const deleteDeck = (id: string) => {
     toast.info("Pending");
     delDeck(id)

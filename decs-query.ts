@@ -110,6 +110,16 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Decks"],
       }),
+      meEditNickname: builder.mutation<meType, string>({
+        query: (arg) => {
+          return {
+            url: `/v1/auth/me`,
+            method: "PATCH",
+            body: { name: arg },
+          };
+        },
+        invalidatesTags: ["Decks"],
+      }),
       createDeck: builder.mutation<any, { name: string; isPrivate: boolean }>({
         query: (arg) => {
           return {
@@ -192,10 +202,17 @@ const extendedApi = baseApi.injectEndpoints({
             }),
           );
 
+          const patchResultDecks = dispatch(
+            baseApi.util.updateQueryData("getDecks", undefined, () => {
+              return null;
+            }),
+          );
+
           try {
             await queryFulfilled;
           } catch {
             patchResult.undo();
+            patchResultDecks.undo();
 
             /**
              * Alternatively, on failure you can invalidate the corresponding cache tags
@@ -203,6 +220,19 @@ const extendedApi = baseApi.injectEndpoints({
              * dispatch(api.util.invalidateTags(['Post']))
              */
           }
+        },
+      }),
+      recoveryPassword: builder.mutation<any, string>({
+        query: (email) => {
+          return {
+            url: `/v1/auth/recover-password`,
+            method: "POST",
+            body: {
+              html: '<h1>Hi, ##name##</h1><p>Click <a href="##token##">here</a> to recover your password</p>',
+              email: email,
+              subject: "string",
+            },
+          };
         },
       }),
       createUser: builder.mutation<any, FormValuesReg>({
@@ -235,4 +265,6 @@ export const {
   useLazyGetCardsQuery,
   useLazyMeQuery,
   useGetDecksByIdQuery,
+  useMeEditNicknameMutation,
+  useRecoveryPasswordMutation,
 } = extendedApi;

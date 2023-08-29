@@ -8,6 +8,8 @@ import {
 
 import Cards from "./src/common/cards/cards.tsx";
 import { LoginForm } from "./src/components/ui/auth/login-form/login-from.tsx";
+import { CheckEmail } from "./src/components/ui/checkEmail";
+import { EditProfile } from "./src/components/ui/editProfile";
 import { ForgotYourPassword } from "./src/components/ui/forgotYourPassword";
 import MainLayout from "./src/components/ui/layout/MainLayout.tsx";
 import { Login } from "./src/components/ui/login";
@@ -47,6 +49,14 @@ const privateRoutes: RouteObject[] = [
   {
     path: "/forgotYourPassword",
     element: <ForgotYourPassword />,
+  },
+  {
+    path: "/editProfile",
+    element: <EditProfile />,
+  },
+  {
+    path: "/checkEmail",
+    element: <CheckEmail />,
   },
 ];
 

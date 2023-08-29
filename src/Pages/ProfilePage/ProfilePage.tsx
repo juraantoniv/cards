@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useMeQuery } from "../../../decs-query.ts";
+import { DecksForm } from "../../components/ui/createDecks";
 import { Profile } from "../../components/ui/profile";
 
 import s from "./ProfilePage.module.scss";
 
 const ProfilePage = () => {
   const { data } = useMeQuery();
+  const [show, setShow] = useState(false);
 
   return (
     <div className={s.prof}>
       <Profile name={data?.name} email={data?.email} />
+      {show && (
+        <DecksForm
+          forEditFlag={true}
+          callback={() => setShow(false)}
+          headerName={"Edit pack"}
+        />
+      )}
     </div>
   );
 };
