@@ -3,6 +3,7 @@ import * as child_process from "child_process";
 import { baseApi } from "./base-api";
 import { FormValues } from "./src/components/ui/auth/login-form/login-from.tsx";
 import { meType } from "./src/components/ui/layout/MainLayout.tsx";
+import { lernType } from "./src/components/ui/learnPackComponent";
 import { decksSlice } from "./src/services/store.ts";
 import { FormValuesReg } from "./src/userRegisterForm.tsx";
 import { decksResponse, userRegisterType } from "./types.ts";
@@ -169,6 +170,28 @@ const extendedApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["Decks", "Cards"],
       }),
+      getRandomCard: builder.query<lernType, { id: string }>({
+        query: (arg) => {
+          return {
+            url: `/v1/decks/${arg.id}/learn`,
+            method: "GET",
+          };
+        },
+        // invalidatesTags: ["Cards"],
+      }),
+      setRate: builder.mutation<
+        any,
+        { id: string; cardId: string; grade: number }
+      >({
+        query: (arg) => {
+          return {
+            url: `/v1/decks/${arg.id}/learn`,
+            method: "POST",
+            body: { cardId: arg.cardId, grade: arg.grade },
+          };
+        },
+        // invalidatesTags: ["Cards"],
+      }),
       deleteCard: builder.mutation<void, string>({
         query: (id) => {
           return {
@@ -267,4 +290,6 @@ export const {
   useGetDecksByIdQuery,
   useMeEditNicknameMutation,
   useRecoveryPasswordMutation,
+  useGetRandomCardQuery,
+  useSetRateMutation,
 } = extendedApi;

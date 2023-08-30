@@ -14,6 +14,7 @@ const initialState = {
   name: "",
   showDeleteForm: false,
   editMode: false,
+  id: "",
 };
 
 export const decksSlice = createSlice({
@@ -34,6 +35,9 @@ export const decksSlice = createSlice({
     },
     setSort: (state, action: PayloadAction<string>) => {
       state.orderBy = action.payload;
+    },
+    setId: (state, action: PayloadAction<string>) => {
+      state.id = action.payload;
     },
     setCardCount: (state, action: PayloadAction<Array>) => {
       state.cardsCount = action.payload;

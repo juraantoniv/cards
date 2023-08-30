@@ -12,9 +12,12 @@ import { CheckEmail } from "./src/components/ui/checkEmail";
 import { EditProfile } from "./src/components/ui/editProfile";
 import { ForgotYourPassword } from "./src/components/ui/forgotYourPassword";
 import MainLayout from "./src/components/ui/layout/MainLayout.tsx";
+import Learn from "./src/components/ui/learnPackComponent/learn.tsx";
 import { Login } from "./src/components/ui/login";
 import { Register } from "./src/components/ui/register";
+import RatePage from "./src/Pages/answerPage/ratePage.tsx";
 import Deks from "./src/Pages/Decks/Deks.tsx";
+import LearPage from "./src/Pages/learnPage/learPage.tsx";
 import ProfilePage from "./src/Pages/ProfilePage/ProfilePage.tsx";
 import UserRegisterForm, { userRegisterForm } from "./src/userRegisterForm.tsx";
 
@@ -57,6 +60,14 @@ const privateRoutes: RouteObject[] = [
   {
     path: "/checkEmail",
     element: <CheckEmail />,
+  },
+  {
+    path: "/learn",
+    element: <LearPage />,
+  },
+  {
+    path: "/rate",
+    element: <RatePage />,
   },
 ];
 

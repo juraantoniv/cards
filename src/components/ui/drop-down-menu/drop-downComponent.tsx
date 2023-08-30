@@ -23,12 +23,14 @@ type DropdownProps = {
   arrItems: Array<string>;
   data?: meType;
   children?: ReactNode;
+  id?: string;
 };
 
 export const DropdownMenuComponent: React.FC<DropdownProps> = ({
   arrItems,
   data,
   children,
+  id,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -61,7 +63,12 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
     dispatch(decksSlice.actions.showDeleteForm(true));
   };
 
-  const leenMode = () => {};
+  const leenMode = () => {
+    navigate("/learn");
+    if (id) {
+      dispatch(decksSlice.actions.setId(id));
+    }
+  };
 
   const nonFunc = () => {};
 

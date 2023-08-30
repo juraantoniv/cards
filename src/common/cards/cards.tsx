@@ -161,7 +161,10 @@ const Cards = () => {
             <div>
               <Typography variant={"body2"}>{deckName?.name}</Typography>
             </div>
-            <DropdownMenuComponent arrItems={["Learn", "Edit", "Delete"]}>
+            <DropdownMenuComponent
+              arrItems={["Learn", "Edit", "Delete"]}
+              id={id}
+            >
               <IconDotsVerticalCircle />
             </DropdownMenuComponent>
           </div>

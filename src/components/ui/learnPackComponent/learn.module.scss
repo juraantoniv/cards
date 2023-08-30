@@ -1,0 +1,68 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  width: 420px;
+  margin-top: 150px;
+
+  background: var(--color-dark-700);
+}
+
+.text {
+  --font-family-primary: "Roboto", sans-serif;
+
+  font-size: 26px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 36px;
+  color: var(--light-100, #fff);
+}
+
+.text2 {
+  /* Subtitle 1 */
+  --font-family-primary: "Roboto", sans-serif;
+
+  margin: 0 84px 2px 36px;
+
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--light-100, #fff);
+}
+
+.button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  width: 348px;
+  margin: 20px 36px 48px;
+  padding: 6px 28px;
+}
+
+.buttonText {
+  /* Subtitle 2 */
+  --font-family-primary: "Roboto", sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--light-100, #fff);
+}
+
+.text3 {
+  --font-family-primary: "Roboto", sans-serif;
+
+  /* Body 2 */
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--dark-100, #808080);
+}

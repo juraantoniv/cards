@@ -61,9 +61,7 @@ const Deks = () => {
   const [name, setName] = useState("");
   const [createDeckFlag, setCreateDeckFlag] = useState(false);
 
-  const itemsPerPage: number = useAppSelector(
-    (state) => state.decksSlice.itemsPerPage,
-  );
+  const itemsPerPage = useAppSelector((state) => state.decksSlice.itemsPerPage);
   const { data, isLoading } = useGetDecksQuery({
     currentPage: `${page}`,
     itemsPerPage: `${itemsPerPage}`,
