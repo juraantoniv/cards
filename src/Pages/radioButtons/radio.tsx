@@ -18,18 +18,28 @@ export const RadioButtonsGroup: React.FC<radio> = ({ callback }) => {
 
   return (
     <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+      <FormLabel style={{ color: "white" }} id="demo-radio-buttons-group-label">
+        Rate yourself:
+      </FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="female"
+        defaultValue="1"
         name="radio-buttons-group"
         onChange={(e) => onchangeHandler(e.currentTarget.value)}
       >
-        <FormControlLabel value="1" control={<Radio />} label="Female" />
-        <FormControlLabel value="2" control={<Radio />} label="Male" />
-        <FormControlLabel value="3" control={<Radio />} label="Other" />
-        <FormControlLabel value="4" control={<Radio />} label="Other" />
-        <FormControlLabel value="5" control={<Radio />} label="Other" />
+        <FormControlLabel value="1" control={<Radio />} label="Did not know" />
+        <FormControlLabel value="2" control={<Radio />} label="Forgot" />
+        <FormControlLabel
+          value="3"
+          control={<Radio />}
+          label="A lot of thought"
+        />
+        <FormControlLabel value="4" control={<Radio />} label="Сonfused" />
+        <FormControlLabel
+          value="5"
+          control={<Radio />}
+          label="Knew the answer"
+        />
       </RadioGroup>
     </FormControl>
   );
