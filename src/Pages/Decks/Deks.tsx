@@ -72,7 +72,6 @@ const Deks = () => {
     maxCardsCount: `${countCards[1]}`,
   });
 
-  const [logOut, {}] = useLogOutMutation();
   const [delDeck, {}] = useDeleteDeckMutation();
 
   function onChangeHandler() {
@@ -90,6 +89,8 @@ const Deks = () => {
         toast.success("Deleted");
       });
   };
+
+  console.log(LogOutData);
 
   if (!LogOutData) {
     return <Navigate to={"/login"} />;

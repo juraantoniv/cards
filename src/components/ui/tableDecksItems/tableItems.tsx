@@ -101,7 +101,9 @@ export const TableDecksItems = ({
           <tr key={item.id} className={st.tr}>
             <td className={st.tdCommonStyle}>{item.question}</td>
             <td className={st.tdCommonStyle}>{item.answer}</td>
-            <td className={st.tdCommonStyle}>{item.created}</td>
+            <td className={st.tdCommonStyle}>
+              {new Date(item?.created).toLocaleString("eu-EU")}
+            </td>
             <td className={st.tdCommonStyle}>
               <Rating
                 name={"rating"}

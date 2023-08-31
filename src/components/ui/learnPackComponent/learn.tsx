@@ -34,7 +34,7 @@ export type learnPropsType = {
   answer?: boolean;
   data?: lernType;
   callback: () => void;
-  getValue: (value: string) => void;
+  getValue?: (value: string) => void;
 };
 const Learn: React.FC<learnPropsType> = ({
   answer,

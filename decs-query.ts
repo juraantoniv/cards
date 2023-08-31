@@ -170,11 +170,12 @@ const extendedApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["Decks", "Cards"],
       }),
-      getRandomCard: builder.query<lernType, { id: string }>({
+      getRandomCard: builder.query<lernType, { id: string; cardId: string }>({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}/learn`,
             method: "GET",
+            params: { previousCardId: arg.cardId },
           };
         },
         // invalidatesTags: ["Cards"],

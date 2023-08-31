@@ -15,6 +15,8 @@ const initialState = {
   showDeleteForm: false,
   editMode: false,
   id: "",
+  previousCard: "",
+  deckId: "",
 };
 
 export const decksSlice = createSlice({
@@ -30,11 +32,17 @@ export const decksSlice = createSlice({
     setSearchByName: (state, action: PayloadAction<string>) => {
       state.searchByName = action.payload;
     },
+    setDeckId: (state, action: PayloadAction<string>) => {
+      state.deckId = action.payload;
+    },
     loadDecks: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
     setSort: (state, action: PayloadAction<string>) => {
       state.orderBy = action.payload;
+    },
+    setPrevious: (state, action: PayloadAction<string>) => {
+      state.previousCard = action.payload;
     },
     setId: (state, action: PayloadAction<string>) => {
       state.id = action.payload;

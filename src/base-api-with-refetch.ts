@@ -5,9 +5,6 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
-import { useDispatch } from "react-redux";
-
-import { decksSlice } from "./services/store.ts";
 
 const baseUrl = "https://api.flashcards.andrii.es";
 

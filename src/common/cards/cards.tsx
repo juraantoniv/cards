@@ -19,15 +19,11 @@ import { Delete } from "../../components/deletePopComponent/detete.tsx";
 import { Button } from "../../components/ui/button";
 import { DecksForm } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
-import {
-  Memo,
-  NotFoundPage,
-} from "../../components/ui/notFound/notFoundPage.tsx";
+import { Memo } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecksItems } from "../../components/ui/tableDecksItems";
 import { TextField } from "../../components/ui/textField";
 import { Typography } from "../../components/ui/typography";
 import { decksSlice } from "../../services/store.ts";
-import { ControlTextField } from "../controlTextField/controlTextField.tsx";
 
 import s from "./card.module.scss";
 
@@ -63,7 +59,6 @@ const Cards = () => {
   const [show, setShow] = useState(false);
   const [form, showForm] = useState(false);
   const [edit, showEdit] = useState(false);
-  // const [del, showDelForm] = useState(showDeleteForm);
   const [CardId, setCardId] = useState("");
 
   const navigate = useNavigate();
@@ -112,7 +107,7 @@ const Cards = () => {
   const naw = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
     lasyFunc();
-    navigate(-1);
+    navigate("/");
   };
 
   const deleteDeck = () => {

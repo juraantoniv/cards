@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 export const RatingComponent = () => {
   return (
     <Stack spacing={1}>
-      <Rating name="rating" precision={1} size={"small"} />
+      <Rating name="rating" precision={1} size={"small"} readOnly />
     </Stack>
   );
 };

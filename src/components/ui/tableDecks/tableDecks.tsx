@@ -97,6 +97,7 @@ export const TableDecks = ({
   };
 
   const toCardsHandler = (id: string) => {
+    dispatch(decksSlice.actions.setDeckId(id));
     navigate(`${id}`);
   };
 

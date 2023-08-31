@@ -28,8 +28,6 @@ export const Header: FC<HeaderProps> = ({
     header: clsx(s.header, className),
   };
 
-  console.log(logIn);
-
   return (
     <>
       <header className={classNames.header} {...rest}>
