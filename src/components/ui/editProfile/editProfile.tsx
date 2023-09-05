@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Abc } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -10,6 +11,7 @@ import { useAppDispatch } from "../../../../store.ts";
 import iconUser from "../../../assets/icons/iconUser.png";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
 import { decksSlice } from "../../../services/store.ts";
+import { AvatarDemo } from "../avatar/avatar.tsx";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";
@@ -43,17 +45,17 @@ export const EditProfile = () => {
           Personal Information
         </Typography>
 
-        <img className={st.iconUser} src={iconUser} />
+        <AvatarDemo className={st.avatar} />
         <ControlTextField
+          sizeWidthTextField={"100%"}
           control={control}
           name="nickname"
           placeholder="Nickname"
-          sizeWidthTextField="21.75rem"
-          type="email"
+          type="text"
           label="Nickname"
         />
 
-        <Button type={"submit"} fullWidth={true}>
+        <Button type={"submit"} fullWidth={false} className={st.button}>
           Save Changes
         </Button>
       </CardComponent>

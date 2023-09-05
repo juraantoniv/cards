@@ -17,7 +17,7 @@ import { Login } from "./src/components/ui/login";
 import { Register } from "./src/components/ui/register";
 import RatePage from "./src/Pages/answerPage/ratePage.tsx";
 import Deks from "./src/Pages/Decks/Deks.tsx";
-import LearPage from "./src/Pages/learnPage/learPage.tsx";
+import LearnPage from "./src/Pages/learnPage/learnPage.tsx";
 import ProfilePage from "./src/Pages/ProfilePage/ProfilePage.tsx";
 import UserRegisterForm, { userRegisterForm } from "./src/userRegisterForm.tsx";
 
@@ -63,7 +63,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     path: "/learn",
-    element: <LearPage />,
+    element: <LearnPage />,
   },
   {
     path: "/rate",

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -17,12 +22,16 @@ import IconDotsVerticalCircle from "../../assets/icons/iconDots.tsx";
 import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
 import { Delete } from "../../components/deletePopComponent/detete.tsx";
 import { Button } from "../../components/ui/button";
-import { DecksForm } from "../../components/ui/createDecks";
+import { createDecks, DecksForm } from "../../components/ui/createDecks";
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
 import { Memo } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecksItems } from "../../components/ui/tableDecksItems";
 import { TextField } from "../../components/ui/textField";
 import { Typography } from "../../components/ui/typography";
+import { CreateCardPage } from "../../Pages/createCardPage/createCardPage.tsx";
+import { CreateDeckPage } from "../../Pages/CreateDeckPage/createDeckPage.tsx";
+import EditCardPage from "../../Pages/editCardPage/editCardPage.tsx";
+import { EditDeckPage } from "../../Pages/iditDeckNamePage/editDeckNamePage.tsx";
 import { decksSlice } from "../../services/store.ts";
 
 import s from "./card.module.scss";
@@ -32,11 +41,11 @@ const headerDecksItems = [
   { key: "cardsCount", title: "Answer" },
   { key: "updated", title: "Last Updated" },
   { key: "created", title: "Rate" },
-  { key: "created", title: "" },
 ];
 
 const Cards = () => {
   const { id } = useParams();
+
   const [name, setName] = useState("");
   const dispatch = useAppDispatch();
   const showDeleteForm = useAppSelector(
@@ -77,8 +86,8 @@ const Cards = () => {
     setCardId(id);
   };
 
-  const createCardHandler = (question: string, answer: string) => {
-    createCard({ question: question, answer: answer, id: id });
+  const createCardHandler = (data: createDecks) => {
+    createCard({ question: data.question, answer: data.answer, id: id });
   };
 
   const onShow = () => {
@@ -106,6 +115,7 @@ const Cards = () => {
   };
   const naw = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
+    dispatch(decksSlice.actions.setAuthorId(""));
     lasyFunc();
     navigate("/");
   };
@@ -119,10 +129,13 @@ const Cards = () => {
           toast.success("Deleted");
           lasyFunc();
         });
+      navigate("/");
     }
 
     dispatch(decksSlice.actions.showDeleteForm(false));
   };
+
+  console.log(editForm);
 
   return (
     <div className={s.card}>
@@ -192,17 +205,16 @@ const Cards = () => {
       )}
       {form && (
         <div className={s.form}>
-          <DecksForm
-            id={id}
+          <CreateCardPage
             callback={closeFormHandler}
-            headerName={"Add New Pack"}
-            func={createCardHandler}
+            headerName={"Add New Card"}
+            dataHandler={createCardHandler}
           />
         </div>
       )}
       {edit && (
         <div className={s.form}>
-          <DecksForm
+          <EditCardPage
             id={CardId}
             callback={closeFormHandler}
             headerName={"EditCard"}
@@ -217,12 +229,11 @@ const Cards = () => {
       )}
       {editForm && (
         <div className={s.show}>
-          <DecksForm
+          <EditDeckPage
             forEditFlag={true}
             id={id}
             callback={editMode}
             headerName={"Edit pack"}
-            name={deckName}
           />
         </div>
       )}

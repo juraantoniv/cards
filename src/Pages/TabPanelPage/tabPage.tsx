@@ -14,8 +14,6 @@ const myId = "f4333448-5615-447f-beca-5893d431d8fe";
 const TabPage = () => {
   const dispatch = useAppDispatch();
 
-  const [getUsers, {}] = useLazyGetDecksQuery();
-
   const [active, setActive] = useState("All");
   const handlerTabPanel1 = (name: string) => {
     setActive(name);

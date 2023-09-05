@@ -5,10 +5,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
-  useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
-  useLogOutMutation,
   useMeQuery,
 } from "../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
@@ -22,12 +20,11 @@ import {
 import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
 import { Header } from "../../components/ui/header";
 import { Login } from "../../components/ui/login";
-import { NotFoundPage } from "../../components/ui/notFound/notFoundPage.tsx";
 import { TableDecks } from "../../components/ui/tableDecks";
 import { TabPanel } from "../../components/ui/tabPanel";
 import { TextField } from "../../components/ui/textField/textField.tsx";
-import { loadBoolean } from "../../services/localStoregeServices.ts";
 import { decksSlice } from "../../services/store.ts";
+import { CreateDeckPage } from "../CreateDeckPage/createDeckPage.tsx";
 import SliderPage from "../sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";
 
@@ -90,8 +87,6 @@ const Deks = () => {
       });
   };
 
-  console.log(LogOutData);
-
   if (!LogOutData) {
     return <Navigate to={"/login"} />;
   }
@@ -100,7 +95,7 @@ const Deks = () => {
     <div className={s.box}>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -108,7 +103,7 @@ const Deks = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
 
       <div className={s.headerDeck}>
@@ -121,8 +116,7 @@ const Deks = () => {
         <TabPage />
         <div className={s.s}>
           {createDeckFlag && (
-            <DecksForm
-              forEditFlag={false}
+            <CreateDeckPage
               callback={onChangeHandlerClose}
               headerName={"Add new pack"}
             />

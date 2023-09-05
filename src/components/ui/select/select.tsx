@@ -42,19 +42,14 @@ export const SelectControl = ({
 
       <Select.Portal>
         <Select.Content
-          style={{ width: widthBlockSelector }}
           className={st.selectContent}
           position="popper" /* - список строго под заголовком*/
         >
           <Select.Viewport>
             <Select.Group>
-              {stateSelectItems.map((e) => {
+              {stateSelectItems?.map((e) => {
                 return (
-                  <Select.Item
-                    key={e.value}
-                    className={st.item}
-                    value={e.value}
-                  >
+                  <Select.Item key={e.value} value={e.value}>
                     <Select.ItemText className={st.itemText}>
                       {e.text}
                     </Select.ItemText>

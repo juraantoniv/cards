@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import {
   useGetRandomCardQuery,
+  useLazyGetCardsQuery,
   useLazyGetDecksQuery,
 } from "../../../decs-query.ts";
 import { useAppSelector } from "../../../store.ts";
@@ -13,17 +14,16 @@ import s from "../../common/cards/card.module.scss";
 import { Button } from "../../components/ui/button";
 import Learn from "../../components/ui/learnPackComponent/learn.tsx";
 import { Typography } from "../../components/ui/typography";
-import { decksSlice } from "../../services/store.ts";
 
 import sx from "./learPage.module.scss";
 
-const LearPage = () => {
+const LearnPage = () => {
   const { id: Params } = useParams();
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.decksSlice.id);
   const prevId = useAppSelector((state) => state.decksSlice.previousCard);
   const deckId = useAppSelector((state) => state.decksSlice.deckId);
-  const [lasyFunc] = useLazyGetDecksQuery();
+  const [lazyFunc] = useLazyGetCardsQuery();
 
   const { data } = useGetRandomCardQuery({
     id: `${id}`,
@@ -31,7 +31,7 @@ const LearPage = () => {
   });
 
   const naw = () => {
-    lasyFunc();
+    lazyFunc();
     navigate(`/${deckId}`);
   };
 
@@ -52,4 +52,4 @@ const LearPage = () => {
   );
 };
 
-export default LearPage;
+export default LearnPage;

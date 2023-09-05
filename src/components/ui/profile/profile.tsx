@@ -6,6 +6,7 @@ import { useLogOutMutation } from "../../../../decs-query.ts";
 import iconUser from "../../../../src/assets/icons/iconUser.png";
 import { IconEdit } from "../../../assets/icons/iconEdit.tsx";
 import { Logout } from "../../../assets/icons/iconLogOut.tsx";
+import { AvatarDemo } from "../avatar/avatar.tsx";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";
@@ -38,7 +39,7 @@ export const Profile: React.FC<ProfileProps> = ({ name, email }) => {
     <CardComponent className={st.card}>
       <Typography variant="large">Personal Information</Typography>
       <div className={st.blockUserAndIcon}>
-        <img className={st.iconUser} src={iconUser} />
+        <AvatarDemo className={st.avatar} />
         <IconEdit onClick={handlerOnClickEditAvatar} className={st.iconEdit} />
       </div>
       <div className={st.blockNameAndIcon}>

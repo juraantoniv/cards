@@ -7,6 +7,7 @@
   width: 542px;
 
   background: var(--dark-700, #171717);
+  border: 1px solid var(--dark-500, #333);
 }
 
 .center {
@@ -16,8 +17,6 @@
 
   width: 542px;
   padding: 18px 24px;
-
-  background: var(--dark-700, #171717);
 }
 
 .header {
@@ -48,6 +47,4 @@
   width: 542px;
   height: 84px;
   padding: 12px 24px 36px;
-
-  background: var(--dark-700, #171717);
 }

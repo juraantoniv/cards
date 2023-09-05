@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { useLogInMutation, useMeQuery } from "../../../../decs-query";
-import { useAppSelector } from "../../../../store.ts";
-import { loadBoolean } from "../../../services/localStoregeServices.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
-import { Login } from "../login";
+
+const style = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
 export type meType = {
   avatar: string;
@@ -31,19 +34,22 @@ const MainLayout = () => {
     navigate("/login");
   };
 
+  const onClickHandler = () => {
+    navigate("/");
+  };
+
   return (
     <div>
       {isLoading ? (
         <LinearProgress />
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Header name={data?.name} logIn={!!data} callback={logIN}>
+        <div style={style}>
+          <Header
+            name={data?.name}
+            logIn={!!data}
+            callback={logIN}
+            navigate={onClickHandler}
+          >
             <DropdownMenuComponent
               data={data}
               arrItems={["My Profile", "Sign Out"]}

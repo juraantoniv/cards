@@ -16,7 +16,7 @@ type getDecksArgs = {
   orderBy?: string;
   currentPage?: string;
   itemsPerPage?: string;
-};
+} | void;
 type Items = {
   id: string;
   deckId: string;
@@ -63,20 +63,21 @@ export type userDecks = {
   cardsCount: number;
 };
 type cardTypeArgs = {
-  id: string;
-  answer: string;
-  question: string;
+  id?: string;
+  answer?: string;
+  question?: string;
+  questionImg?: string;
+  answerImg?: string;
 };
 
 const extendedApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
     return {
-      getDecks: builder.query<decksResponse, getDecksArgs | void>({
-        query: (arg) => {
+      getDecks: builder.query<decksResponse, getDecksArgs>({
+        query: (params) => {
           return {
             url: `/v1/decks`,
-            method: "GET",
-            params: arg,
+            params: params,
           };
         },
         providesTags: ["Decks"],
@@ -85,7 +86,6 @@ const extendedApi = baseApi.injectEndpoints({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}`,
-            method: "GET",
           };
         },
         providesTags: ["getName"],
@@ -97,7 +97,6 @@ const extendedApi = baseApi.injectEndpoints({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}/cards`,
-            method: "GET",
           };
         },
         providesTags: ["Cards"],
@@ -106,7 +105,6 @@ const extendedApi = baseApi.injectEndpoints({
         query: () => {
           return {
             url: `/v1/auth/me`,
-            method: "GET",
           };
         },
         providesTags: ["Decks"],
@@ -139,14 +137,19 @@ const extendedApi = baseApi.injectEndpoints({
             body: { name: arg.name },
           };
         },
-        invalidatesTags: ["getName"],
+        invalidatesTags: ["Decks", "getName"],
       }),
       createCard: builder.mutation<any, cardTypeArgs>({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}/cards`,
             method: "POST",
-            body: { question: arg.question, answer: arg.answer },
+            body: {
+              questionImg: arg.questionImg,
+              answerImg: arg.answerImg,
+              question: arg.question,
+              answer: arg.question,
+            },
           };
         },
         invalidatesTags: ["Cards"],
@@ -168,7 +171,7 @@ const extendedApi = baseApi.injectEndpoints({
             method: "DELETE",
           };
         },
-        invalidatesTags: ["Decks", "Cards"],
+        invalidatesTags: ["Decks"],
       }),
       getRandomCard: builder.query<lernType, { id: string; cardId: string }>({
         query: (arg) => {
@@ -178,7 +181,6 @@ const extendedApi = baseApi.injectEndpoints({
             params: { previousCardId: arg.cardId },
           };
         },
-        // invalidatesTags: ["Cards"],
       }),
       setRate: builder.mutation<
         any,
@@ -191,7 +193,7 @@ const extendedApi = baseApi.injectEndpoints({
             body: { cardId: arg.cardId, grade: arg.grade },
           };
         },
-        // invalidatesTags: ["Cards"],
+        invalidatesTags: ["Decks", "Cards"],
       }),
       deleteCard: builder.mutation<void, string>({
         query: (id) => {

@@ -14,7 +14,12 @@ export type HeaderProps = {
   children: ReactNode;
   name?: string;
   callback: () => void;
+  navigate: () => void;
 } & Omit<ComponentProps<"header">, "children">;
+
+const pointer = {
+  cursor: "pointer",
+};
 
 export const Header: FC<HeaderProps> = ({
   children,
@@ -31,7 +36,12 @@ export const Header: FC<HeaderProps> = ({
   return (
     <>
       <header className={classNames.header} {...rest}>
-        <img src={im} alt={"logo"}></img>
+        <img
+          style={pointer}
+          src={im}
+          alt={"logo"}
+          onClick={rest.navigate}
+        ></img>
         {logIn ? (
           <div style={{ display: "flex" }}>
             {name && (

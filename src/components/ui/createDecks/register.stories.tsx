@@ -1,15 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from "@storybook/react";
 
-import { Register } from './register.tsx'
+import { Register } from "./formCreateData.tsx";
 
 const meta = {
-  title: 'Components/Register',
+  title: "Components/Register",
   component: Register,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {},
-} satisfies Meta<typeof Register>
+} satisfies Meta<typeof Register>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const SingIn: Story = {}
+export const SingIn: Story = {};

@@ -80,8 +80,7 @@ export const TextField = (props: PropsInputBaseType) => {
         className={error ? st.error : st.blockIconInput}
         style={{ maxWidth: sizeWidthTextField }}
       >
-        {type === "text" ||
-          ("email" && <IconSearch className={st.iconSearch} />)}
+        {!type === "text" && <IconSearch className={st.iconSearch} />}
 
         <input
           className={`${st[type]}  ${className}

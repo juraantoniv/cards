@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { useGetDecksQuery } from "../../../../decs-query.ts";
 import { useAppDispatch } from "../../../../store.ts";
@@ -9,6 +9,7 @@ import { ArrowUpIcon } from "../../../assets/icons/arrowUpIcon.tsx";
 import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
+import { EditDeckPage } from "../../../Pages/iditDeckNamePage/editDeckNamePage.tsx";
 import { decksSlice } from "../../../services/store.ts";
 import { Delete } from "../../deletePopComponent/detete.tsx";
 import { DecksForm } from "../createDecks";
@@ -83,6 +84,7 @@ export const TableDecks = ({
   };
 
   const beforeDeleteHandler = (id: string, name: string) => {
+    console.log(id);
     setId(id);
     setShowForDelete(true);
   };
@@ -139,12 +141,12 @@ export const TableDecks = ({
                 <PlayIcon onClick={() => toCardsHandler(item.id)} />
                 <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
-                  style={{ cursor: "alias" }}
+                  style={{ cursor: "unset" }}
                   onClick={() => beforeDeleteHandler(item.id, item.name)}
                 />
                 {show && (
                   <div className={st.s}>
-                    <DecksForm
+                    <EditDeckPage
                       forEditFlag={true}
                       id={id}
                       callback={() => setShow(false)}

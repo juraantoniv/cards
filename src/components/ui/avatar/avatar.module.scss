@@ -1,5 +1,5 @@
-@import '@radix-ui/colors/black-alpha.css';
-@import '@radix-ui/colors/violet.css';
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/violet.css";
 
 .AvatarRoot {
   user-select: none;
@@ -39,4 +39,10 @@
   color: var(--violet-11);
 
   background-color: white;
+}
+
+.divStyle {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
