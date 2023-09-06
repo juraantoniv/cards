@@ -66,7 +66,7 @@ type cardTypeArgs = {
   id?: string;
   answer?: string;
   question?: string;
-  questionImg?: string;
+  questionImg?: any;
   answerImg?: string;
 };
 
@@ -82,7 +82,15 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Decks"],
       }),
-      getDecksById: builder.query<userDecks, { id: string }>({
+      getDecksById: builder.query<Items, { id: string }>({
+        query: (arg) => {
+          return {
+            url: `/v1/cards/${arg.id}`,
+          };
+        },
+        providesTags: ["getName"],
+      }),
+      getById: builder.query<userDecks, { id: string }>({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}`,
@@ -97,6 +105,14 @@ const extendedApi = baseApi.injectEndpoints({
         query: (arg) => {
           return {
             url: `/v1/decks/${arg.id}/cards`,
+          };
+        },
+        providesTags: ["Cards"],
+      }),
+      getCardById: builder.query<Items, { id: string | undefined }>({
+        query: (arg) => {
+          return {
+            url: `/v1/cards/${arg.id}`,
           };
         },
         providesTags: ["Cards"],
@@ -295,4 +311,6 @@ export const {
   useRecoveryPasswordMutation,
   useGetRandomCardQuery,
   useSetRateMutation,
+  useGetCardByIdQuery,
+  useGetByIdQuery,
 } = extendedApi;

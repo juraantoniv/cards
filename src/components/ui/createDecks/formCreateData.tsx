@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
+import {
+  useGetByIdQuery,
+  useGetCardByIdQuery,
+  useGetDecksByIdQuery,
+} from "../../../../decs-query.ts";
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
@@ -38,6 +43,7 @@ type createDecksType = {
   func?: (question: string, answer: string) => void;
   editModeCard?: boolean;
   dataHandler: (data: createDecks) => void;
+  carId?: string;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
@@ -50,9 +56,24 @@ export const DecksForm: React.FC<createDecksType> = ({
   id,
   func,
   editModeCard,
+  carId,
 }) => {
+  const { data: deck } = useGetByIdQuery({
+    id: id,
+  });
+
+  const { data: card } = useGetCardByIdQuery({
+    id: carId,
+  });
+
+  const item = id ? deck?.name : carId ? card?.question : "";
+
   const { handleSubmit, control } = useForm<createDecks>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      question: item,
+      answer: card?.answer,
+    },
   });
 
   const [imageItems, setImagItems] = useState(true);
@@ -115,16 +136,18 @@ export const DecksForm: React.FC<createDecksType> = ({
         ) : (
           <FileUpload id={id} />
         )}
-        <div className={st.button}>
-          <Button className={st.but1} onClick={callback}>
-            <Typography variant={"body2"}>Cancel</Typography>
-          </Button>
-          <Button type={"submit"} className={st.but2}>
-            <Typography variant={"body2"}>
-              {headerName === forEditFlag ? "Edit" : "Create"}
-            </Typography>
-          </Button>
-        </div>
+        {imageItems && (
+          <div className={st.button}>
+            <Button className={st.but1} onClick={callback}>
+              <Typography variant={"body2"}>Cancel</Typography>
+            </Button>
+            <Button type={"submit"} className={st.but2}>
+              <Typography variant={"body2"}>
+                {headerName === forEditFlag ? "Edit" : "Create"}
+              </Typography>
+            </Button>
+          </div>
+        )}
       </CardComponent>
     </form>
   );

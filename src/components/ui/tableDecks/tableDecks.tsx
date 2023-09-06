@@ -84,7 +84,6 @@ export const TableDecks = ({
   };
 
   const beforeDeleteHandler = (id: string, name: string) => {
-    console.log(id);
     setId(id);
     setShowForDelete(true);
   };

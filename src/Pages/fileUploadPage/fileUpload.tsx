@@ -3,61 +3,62 @@ import { ChangeEvent, useState } from "react";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
+import { useForm } from "react-hook-form";
 
 import { useCreateCardMutation } from "../../../decs-query.ts";
-import { Button } from "../../stories/Button.tsx";
+import { Button } from "../../components/ui/button/button.tsx";
+
+import s from "./fileUpload.module.scss";
 
 type FormData = {
   name: string;
   cover: File[];
 };
 
-export const FileUpload = (props: any) => {
-  const [uploadedPhotos, setUploadedPhotos] = useState<FormData>([]);
+export const FileUpload = () => {
+  const { register, control, handleSubmit } = useForm<FormData>();
+
   const [createCard, {}] = useCreateCardMutation();
 
-  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const data1 = new FormData();
-    const data2 = new FormData();
-  };
-  const crateCardHandler = () => {
-    createCard({
-      id: props.id,
-      questionImg: uploadedPhotos[0],
-      answerImg: uploadedPhotos[1],
-      question: "ascsad",
-      answer: "acdwcdwecwe",
-    });
+  const submit = (data: any) => {
+    const formData = new FormData();
+
+    formData.append("file", data.file[0]);
+
+    createCard({ questionImg: formData });
   };
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <label>
-        <input
-          type="file"
-          onChange={uploadHandler}
-          style={{ display: "none" }}
-        />
-        <IconButton component="span">
-          <AddAPhotoIcon sx={{ color: "blue" }} />
-        </IconButton>
-      </label>
+      <form onSubmit={handleSubmit(submit)}>
+        <div className={s.div}>
+          <label>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              {...register("cover")}
+            />
+            <IconButton component="span">
+              <AddAPhotoIcon sx={{ color: "var(--primary-500, #8C61FF)" }} />
+            </IconButton>
+          </label>
 
-      <label>
-        <input
-          type="file"
-          onChange={uploadHandler}
-          style={{ display: "none" }}
-        />
-        <IconButton component="span">
-          <AddAPhotoIcon sx={{ color: "blue" }} />
-        </IconButton>
-      </label>
-      <Button
-        label={"Create a card"}
-        backgroundColor={"Blue"}
-        onClick={crateCardHandler}
-      ></Button>
+          <label>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              {...register("cover")}
+            />
+            <IconButton component="span">
+              <AddAPhotoIcon sx={{ color: "var(--primary-500, #8C61FF)" }} />
+            </IconButton>
+          </label>
+        </div>
+
+        <Button type={"submit"} variant={"primary"} className={s.button}>
+          Add
+        </Button>
+      </form>
     </div>
   );
 };

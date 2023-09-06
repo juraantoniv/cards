@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
+import { Simulate } from "react-dom/test-utils";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -29,6 +30,8 @@ import SliderPage from "../sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";
 
 import s from "./Deks.module.scss";
+
+import loadedData = Simulate.loadedData;
 
 const headerDecksItems = [
   { key: "name", title: "Name" },
@@ -87,9 +90,9 @@ const Deks = () => {
       });
   };
 
-  if (!LogOutData) {
-    return <Navigate to={"/login"} />;
-  }
+  // if (!data?.items) {
+  //   return <Navigate to={"/login"} />;
+  // }
 
   return (
     <div className={s.box}>

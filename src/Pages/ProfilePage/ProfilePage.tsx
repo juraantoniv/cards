@@ -12,7 +12,7 @@ const ProfilePage = () => {
 
   return (
     <div className={s.prof}>
-      <Profile name={data?.name} email={data?.email} />
+      <Profile name={data && data?.name} email={data?.email} />
       {show && (
         <DecksForm
           forEditFlag={true}

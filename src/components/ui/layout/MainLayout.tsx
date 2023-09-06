@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { useLogInMutation, useMeQuery } from "../../../../decs-query";
+import { useMeQuery } from "../../../../decs-query";
+import { decksSlice } from "../../../services/store.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
 
@@ -24,7 +26,7 @@ export type meType = {
   updated: string;
 };
 const MainLayout = () => {
-  const location = useLocation();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ const MainLayout = () => {
 
   const onClickHandler = () => {
     navigate("/");
+    dispatch(decksSlice.actions.setAuthorId(""));
   };
 
   return (

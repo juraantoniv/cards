@@ -1,0 +1,19 @@
+.button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  margin: 20px;
+  padding: 6px 28px;
+
+  background: var(--primary-500, #8c61ff);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+}
+
+.div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+}

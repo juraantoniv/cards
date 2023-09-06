@@ -23,6 +23,7 @@ export const CreateDeckPage: React.FC<CreateType> = ({
   return (
     <>
       <DecksForm
+        id={id}
         callback={callback}
         headerName={headerName}
         dataHandler={onCreateDeckHandler}

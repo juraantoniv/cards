@@ -36,6 +36,7 @@ export const EditDeckPage: React.FC<CreateType> = ({
   return (
     <>
       <DecksForm
+        id={id}
         dataHandler={editCardHandler}
         headerName={headerName}
         callback={callback}

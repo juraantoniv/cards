@@ -51,7 +51,9 @@ export const TableDecksItems = ({
         };
 
         setSort(updatedSort);
-        sendDataToServer(`${updatedSort.key}-${updatedSort.direction}`);
+        if (sendDataToServer) {
+          sendDataToServer(`${updatedSort.key}-${updatedSort.direction}`);
+        }
       } else {
         const updatedSort: SortType = {
           key: key,
@@ -59,7 +61,9 @@ export const TableDecksItems = ({
         };
 
         setSort(updatedSort);
-        sendDataToServer(`${updatedSort.key}-${updatedSort.direction}`);
+        if (sendDataToServer) {
+          sendDataToServer(`${updatedSort.key}-${updatedSort.direction}`);
+        }
       }
     }
   };

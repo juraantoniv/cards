@@ -25,6 +25,7 @@ const EditCardPage: React.FC<editType> = ({
   return (
     <>
       <DecksForm
+        carId={id}
         dataHandler={editCardHandler}
         headerName={headerName}
         callback={callback}

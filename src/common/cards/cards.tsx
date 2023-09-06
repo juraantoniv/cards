@@ -135,8 +135,6 @@ const Cards = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
   };
 
-  console.log(editForm);
-
   return (
     <div className={s.card}>
       <ToastContainer

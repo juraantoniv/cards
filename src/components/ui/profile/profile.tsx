@@ -14,8 +14,8 @@ import { Typography } from "../typography";
 import st from "./profile.module.scss";
 
 type ProfileProps = {
-  name: string;
-  email: string;
+  name: string | undefined;
+  email: string | undefined;
 };
 
 export const Profile: React.FC<ProfileProps> = ({ name, email }) => {
