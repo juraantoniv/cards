@@ -67,7 +67,8 @@ type cardTypeArgs = {
   answer?: string;
   question?: string;
   questionImg?: any;
-  answerImg?: string;
+  answerImg?: any;
+  data?: FormData;
 };
 
 const extendedApi = baseApi.injectEndpoints({
@@ -82,10 +83,10 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Decks"],
       }),
-      getDecksById: builder.query<Items, { id: string }>({
+      getDecksById: builder.query<userDecks, { id: string }>({
         query: (arg) => {
           return {
-            url: `/v1/cards/${arg.id}`,
+            url: `/v1/decks/${arg.id}`,
           };
         },
         providesTags: ["getName"],
@@ -160,12 +161,12 @@ const extendedApi = baseApi.injectEndpoints({
           return {
             url: `/v1/decks/${arg.id}/cards`,
             method: "POST",
-            body: {
-              questionImg: arg.questionImg,
-              answerImg: arg.answerImg,
-              question: arg.question,
-              answer: arg.question,
-            },
+            body: arg.data
+              ? arg.data
+              : {
+                  question: arg.question,
+                  answer: arg.question,
+                },
           };
         },
         invalidatesTags: ["Cards"],
@@ -175,7 +176,12 @@ const extendedApi = baseApi.injectEndpoints({
           return {
             url: `/v1/cards/${arg.id}`,
             method: "PATCH",
-            body: { question: arg.question, answer: arg.answer },
+            body: arg.data
+              ? arg.data
+              : {
+                  question: arg.question,
+                  answer: arg.question,
+                },
           };
         },
         invalidatesTags: ["Cards"],

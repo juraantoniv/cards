@@ -44,6 +44,7 @@ type createDecksType = {
   editModeCard?: boolean;
   dataHandler: (data: createDecks) => void;
   carId?: string;
+  setData?: (data: any) => void;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
@@ -57,6 +58,7 @@ export const DecksForm: React.FC<createDecksType> = ({
   func,
   editModeCard,
   carId,
+  setData,
 }) => {
   const { data: deck } = useGetByIdQuery({
     id: id,
@@ -76,6 +78,10 @@ export const DecksForm: React.FC<createDecksType> = ({
     },
   });
 
+  const setFormData = (data: any) => {
+    setData(data);
+  };
+
   const [imageItems, setImagItems] = useState(true);
 
   const handlerOnSubmit = (data: createDecks) => {
@@ -92,21 +98,21 @@ export const DecksForm: React.FC<createDecksType> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(handlerOnSubmit)}>
-      <CardComponent className={st.common}>
-        <div className={st.header}>
-          <Typography>{headerName}</Typography>
-          <IconClose onClick={callback} />
-        </div>
+    <CardComponent className={st.common}>
+      <div className={st.header}>
+        <Typography>{headerName}</Typography>
+        <IconClose onClick={callback} />
+      </div>
 
-        {headerName === "Add new pack" || headerName === "Edit pack" ? null : (
-          <SelectControl
-            onValueChange={selectOnChangeHandler}
-            stateSelectItems={selectState}
-            headerSelector={"Text"}
-          />
-        )}
-        {imageItems ? (
+      {headerName === "Add new pack" || headerName === "Edit pack" ? null : (
+        <SelectControl
+          onValueChange={selectOnChangeHandler}
+          stateSelectItems={selectState}
+          headerSelector={"Text"}
+        />
+      )}
+      {imageItems ? (
+        <form onSubmit={handleSubmit(handlerOnSubmit)}>
           <div className={st.centerCommonent}>
             <ControlTextField
               sizeWidthTextField="484px"
@@ -133,22 +139,24 @@ export const DecksForm: React.FC<createDecksType> = ({
                 />
               ))}
           </div>
-        ) : (
-          <FileUpload id={id} />
-        )}
-        {imageItems && (
-          <div className={st.button}>
-            <Button className={st.but1} onClick={callback}>
-              <Typography variant={"body2"}>Cancel</Typography>
-            </Button>
-            <Button type={"submit"} className={st.but2}>
-              <Typography variant={"body2"}>
-                {headerName === forEditFlag ? "Edit" : "Create"}
-              </Typography>
-            </Button>
-          </div>
-        )}
-      </CardComponent>
-    </form>
+          {imageItems && (
+            <div className={st.button}>
+              <Button className={st.but1} onClick={callback}>
+                <Typography variant={"body2"}>Cancel</Typography>
+              </Button>
+              <Button type={"submit"} className={st.but2}>
+                <Typography variant={"body2"}>
+                  {headerName === forEditFlag ? "Edit" : "Create"}
+                </Typography>
+              </Button>
+            </div>
+          )}
+        </form>
+      ) : (
+        <div>
+          <FileUpload id={id} setData={setFormData} />
+        </div>
+      )}
+    </CardComponent>
   );
 };

@@ -18,6 +18,10 @@ const EditCardPage: React.FC<editType> = ({
 }) => {
   const [editCard, {}] = useEditCardMutation();
 
+  const dataForm = (data: any) => {
+    editCard({ id: id, data: data });
+  };
+
   const editCardHandler = (data: createDecks) => {
     editCard({ question: data.question, answer: data.answer, id: id });
   };
@@ -25,6 +29,7 @@ const EditCardPage: React.FC<editType> = ({
   return (
     <>
       <DecksForm
+        setData={dataForm}
         carId={id}
         dataHandler={editCardHandler}
         headerName={headerName}

@@ -103,8 +103,20 @@ export const TableDecksItems = ({
       <tbody>
         {dataContentTable?.items.map((item) => (
           <tr key={item.id} className={st.tr}>
-            <td className={st.tdCommonStyle}>{item.question}</td>
-            <td className={st.tdCommonStyle}>{item.answer}</td>
+            <td className={st.tdCommonStyle}>
+              {item.questionImg ? (
+                <img src={item.questionImg} className={st.img} />
+              ) : (
+                item.question
+              )}
+            </td>
+            <td className={st.tdCommonStyle}>
+              {item.answerImg ? (
+                <img src={item.answerImg} className={st.img} />
+              ) : (
+                item.answer
+              )}
+            </td>
             <td className={st.tdCommonStyle}>
               {new Date(item?.created).toLocaleString("eu-EU")}
             </td>

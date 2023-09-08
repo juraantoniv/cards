@@ -7,6 +7,7 @@ type CreateType = {
   headerName?: string;
   forEditFlag?: boolean;
   dataHandler: (data: createDecks) => void;
+  id: string | undefined;
 };
 
 export const CreateCardPage: React.FC<CreateType> = ({
@@ -14,10 +15,12 @@ export const CreateCardPage: React.FC<CreateType> = ({
   forEditFlag,
   headerName,
   dataHandler,
+  id,
 }) => {
   return (
     <>
       <DecksForm
+        id={id}
         dataHandler={dataHandler}
         headerName={headerName}
         callback={callback}

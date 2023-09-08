@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
 
 import { useCreateCardMutation } from "../../../decs-query.ts";
 import { Button } from "../../components/ui/button/button.tsx";
@@ -11,11 +11,18 @@ import { Button } from "../../components/ui/button/button.tsx";
 import s from "./fileUpload.module.scss";
 
 type FormData = {
-  name: string;
-  cover: File[];
+  name?: string;
+  cover?: File[];
+  cover1?: File[];
+  id: string;
 };
 
-export const FileUpload = () => {
+type FileUpload = {
+  id: string;
+  setData?: (data: any) => void;
+};
+
+export const FileUpload: React.FC<FileUpload> = ({ id, setData }) => {
   const { register, control, handleSubmit } = useForm<FormData>();
 
   const [createCard, {}] = useCreateCardMutation();
@@ -23,9 +30,16 @@ export const FileUpload = () => {
   const submit = (data: any) => {
     const formData = new FormData();
 
-    formData.append("file", data.file[0]);
+    formData.append("questionImg", data.cover[0]);
+    formData.append("question", "asd");
 
-    createCard({ questionImg: formData });
+    formData.append("answerImg", data.cover1[0]);
+    formData.append("answer", "asd1");
+    if (setData) {
+      setData(formData);
+    }
+
+    createCard({ id, data: formData });
   };
 
   return (
@@ -47,7 +61,7 @@ export const FileUpload = () => {
             <input
               type="file"
               style={{ display: "none" }}
-              {...register("cover")}
+              {...register("cover1")}
             />
             <IconButton component="span">
               <AddAPhotoIcon sx={{ color: "var(--primary-500, #8C61FF)" }} />

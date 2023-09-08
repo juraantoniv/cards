@@ -62,6 +62,8 @@ const Cards = () => {
     id: `${id}`,
   });
 
+  console.log(deckName);
+
   const [createCard, {}] = useCreateCardMutation();
   const [delDeck, {}] = useDeleteDeckMutation();
 
@@ -204,6 +206,7 @@ const Cards = () => {
       {form && (
         <div className={s.form}>
           <CreateCardPage
+            id={id}
             callback={closeFormHandler}
             headerName={"Add New Card"}
             dataHandler={createCardHandler}
