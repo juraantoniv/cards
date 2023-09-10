@@ -24,6 +24,7 @@ type DropdownProps = {
   data?: meType;
   children?: ReactNode;
   id?: string;
+  img?: string;
 };
 
 export const DropdownMenuComponent: React.FC<DropdownProps> = ({
@@ -31,6 +32,7 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
   data,
   children,
   id,
+  img,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -76,7 +78,7 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
     <DropdownMenu.Root open={open} onOpenChange={setState}>
       <DropdownMenu.Trigger asChild>
         <button className={s.IconButton} aria-label="Customise options">
-          {!children ? <AvatarDemo /> : children}
+          {!children ? <AvatarDemo img={img} /> : children}
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
@@ -97,7 +99,7 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
                   alignItems: "center",
                 }}
               >
-                <AvatarDemo />
+                <AvatarDemo img={img} />
                 <div style={{ margin: "10px" }}>
                   <Typography variant={"h3"}>{data?.name}</Typography>
                   <Typography variant={"body2"}>{data?.email}</Typography>

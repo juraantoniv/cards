@@ -32,7 +32,7 @@ const LearnPage = () => {
 
   const naw = () => {
     lazyFunc();
-    navigate(`/${deckId}`);
+    navigate(`/decks/${deckId}`);
   };
 
   const onClickHandler = () => {

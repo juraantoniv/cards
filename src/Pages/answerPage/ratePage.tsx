@@ -42,7 +42,7 @@ const RatePage = () => {
   };
 
   const naw = () => {
-    navigate(`/${deckId}`);
+    navigate(`/decks/${deckId}`);
   };
 
   return (

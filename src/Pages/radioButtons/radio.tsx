@@ -6,6 +6,8 @@ import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 
+import s from "./radio.module.scss";
+
 export type radio = {
   callback?: (rate: string) => void;
 };
@@ -18,7 +20,7 @@ export const RadioButtonsGroup: React.FC<radio> = ({ callback }) => {
 
   return (
     <FormControl>
-      <FormLabel style={{ color: "white" }} id="demo-radio-buttons-group-label">
+      <FormLabel className={s.label} id="demo-radio-buttons-group-label">
         Rate yourself:
       </FormLabel>
       <RadioGroup
@@ -27,7 +29,12 @@ export const RadioButtonsGroup: React.FC<radio> = ({ callback }) => {
         name="radio-buttons-group"
         onChange={(e) => onchangeHandler(e.currentTarget.value)}
       >
-        <FormControlLabel value="1" control={<Radio />} label="Did not know" />
+        <FormControlLabel
+          className={s.radio}
+          value="1"
+          control={<Radio />}
+          label="Did not know"
+        />
         <FormControlLabel value="2" control={<Radio />} label="Forgot" />
         <FormControlLabel
           value="3"

@@ -4,6 +4,7 @@ import { baseApi } from "./base-api";
 import { FormValues } from "./src/components/ui/auth/login-form/login-from.tsx";
 import { meType } from "./src/components/ui/layout/MainLayout.tsx";
 import { lernType } from "./src/components/ui/learnPackComponent";
+import { FormLoginType } from "./src/components/ui/login";
 import { decksSlice } from "./src/services/store.ts";
 import { FormValuesReg } from "./src/userRegisterForm.tsx";
 import { decksResponse, userRegisterType } from "./types.ts";
@@ -71,6 +72,11 @@ type cardTypeArgs = {
   data?: FormData;
 };
 
+type authEdit = {
+  name?: string;
+  avatar?: FormData;
+};
+
 const extendedApi = baseApi.injectEndpoints({
   endpoints: (builder) => {
     return {
@@ -126,12 +132,12 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Decks"],
       }),
-      meEditNickname: builder.mutation<meType, string>({
+      meEditNickname: builder.mutation<meType, authEdit>({
         query: (arg) => {
           return {
             url: `/v1/auth/me`,
             method: "PATCH",
-            body: { name: arg },
+            body: arg.avatar ? arg.avatar : { name: arg.name },
           };
         },
         invalidatesTags: ["Decks"],
@@ -180,7 +186,7 @@ const extendedApi = baseApi.injectEndpoints({
               ? arg.data
               : {
                   question: arg.question,
-                  answer: arg.question,
+                  answer: arg.answer,
                 },
           };
         },
@@ -226,7 +232,7 @@ const extendedApi = baseApi.injectEndpoints({
         },
         invalidatesTags: ["Cards"],
       }),
-      logIn: builder.mutation<any, FormValues>({
+      logIn: builder.mutation<any, FormLoginType>({
         query: (body) => {
           return {
             url: `/v1/auth/login`,

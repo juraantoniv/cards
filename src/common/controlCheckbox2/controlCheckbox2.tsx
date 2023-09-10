@@ -1,13 +1,18 @@
-import { CheckboxProps } from '@radix-ui/react-checkbox'
-import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
+import { CheckboxProps } from "@radix-ui/react-checkbox";
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from "react-hook-form";
 
-import { Checkbox2 } from '../../components/ui/checkbox2'
+import { Checkbox2 } from "../../components/ui/checkbox2";
 
 type PropsType<T extends FieldValues> = {
-  control: Control<T>
-  name: FieldPath<T>
-  label: string
-} & Omit<CheckboxProps, 'onChangeChecked' | 'checked'>
+  control: Control<T>;
+  name: FieldPath<T>;
+  label: string;
+} & Omit<CheckboxProps, "onChangeChecked" | "checked">;
 
 export const ControlCheckbox2 = <T extends FieldValues>({
   label,
@@ -20,7 +25,14 @@ export const ControlCheckbox2 = <T extends FieldValues>({
   } = useController({
     name,
     control,
-  })
+  });
 
-  return <Checkbox2 {...rest} checked={checked} onChangeChecked={onChangeChecked} label={label} />
-}
+  return (
+    <Checkbox2
+      {...rest}
+      checked={checked}
+      onChangeChecked={onChangeChecked}
+      label={label}
+    />
+  );
+};

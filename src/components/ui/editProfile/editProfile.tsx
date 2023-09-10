@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Abc } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -7,10 +6,7 @@ import {
   useMeEditNicknameMutation,
   useMeQuery,
 } from "../../../../decs-query.ts";
-import { useAppDispatch } from "../../../../store.ts";
-import iconUser from "../../../assets/icons/iconUser.png";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
-import { decksSlice } from "../../../services/store.ts";
 import { AvatarDemo } from "../avatar/avatar.tsx";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
@@ -34,8 +30,8 @@ export const EditProfile = () => {
   });
 
   const [edit, {}] = useMeEditNicknameMutation();
-  const handlerOnSubmit = (data: any) => {
-    edit(data.nickname);
+  const handlerOnSubmit = (data: FormEditProfileType) => {
+    edit({ name: data.nickname });
   };
 
   return (
@@ -45,7 +41,7 @@ export const EditProfile = () => {
           Personal Information
         </Typography>
 
-        <AvatarDemo className={st.avatar} />
+        <AvatarDemo className={st.avatar} img={data?.avatar} />
         <ControlTextField
           sizeWidthTextField={"100%"}
           control={control}

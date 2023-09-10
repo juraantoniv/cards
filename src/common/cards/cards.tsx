@@ -13,6 +13,7 @@ import {
   useCreateCardMutation,
   useDeleteCardMutation,
   useDeleteDeckMutation,
+  useEditCardMutation,
   useGetCardsQuery,
   useGetDecksByIdQuery,
   useLazyGetDecksQuery,
@@ -61,6 +62,8 @@ const Cards = () => {
   const { data: deckName } = useGetDecksByIdQuery({
     id: `${id}`,
   });
+
+  const [editCard, {}] = useEditCardMutation();
 
   console.log(deckName);
 
@@ -119,7 +122,16 @@ const Cards = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
     dispatch(decksSlice.actions.setAuthorId(""));
     lasyFunc();
-    navigate("/");
+    navigate("/decks");
+  };
+
+  const editCardHandler = (data: createDecks) => {
+    console.log(data);
+    editCard({ question: data.question, answer: data.answer, id: CardId })
+      .unwrap()
+      .catch((e) => {
+        toast.error(`${e.data.message}`);
+      });
   };
 
   const deleteDeck = () => {
@@ -140,7 +152,7 @@ const Cards = () => {
   return (
     <div className={s.card}>
       <ToastContainer
-        position="top-right"
+        posittion="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -149,7 +161,7 @@ const Cards = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
       {show && (
         <div className={s.show}>
@@ -216,6 +228,7 @@ const Cards = () => {
       {edit && (
         <div className={s.form}>
           <EditCardPage
+            editCardHandler={editCardHandler}
             id={CardId}
             callback={closeFormHandler}
             headerName={"EditCard"}

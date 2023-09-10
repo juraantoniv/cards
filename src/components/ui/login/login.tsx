@@ -22,7 +22,7 @@ const loginSchema = z.object({
   rememberMe: z.boolean().default(true),
 });
 
-type FormLoginType = z.infer<typeof loginSchema>;
+export type FormLoginType = z.infer<typeof loginSchema>;
 export const Login = () => {
   const [logIn, {}] = useLogInMutation();
   const navigate = useNavigate();
@@ -32,13 +32,14 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
   const handlerOnSubmit = (data: FormLoginType) => {
+    console.log(data);
     toast.info("Loading");
     logIn(data)
       .unwrap()
       .then(() => {
         toast.success("Success");
         dispatch(decksSlice.actions.loadDecks(false));
-        navigate("/");
+        navigate("/decks");
       })
       .catch(() => {
         toast.error("Wrong login or password");
@@ -50,7 +51,7 @@ export const Login = () => {
       <CardComponent className={st.common}>
         <ToastContainer
           position="top-right"
-          autoClose={5000}
+          autoClose={4000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

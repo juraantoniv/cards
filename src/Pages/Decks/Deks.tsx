@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
+import { navigate } from "@storybook/addon-links";
 import { Simulate } from "react-dom/test-utils";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -13,16 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
 import { decksResponse } from "../../../types.ts";
 import { Button } from "../../components/ui/button";
-import {
-  CreateDecksForm,
-  createDecksForm,
-  DecksForm,
-} from "../../components/ui/createDecks";
-import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
-import { Header } from "../../components/ui/header";
-import { Login } from "../../components/ui/login";
 import { TableDecks } from "../../components/ui/tableDecks";
-import { TabPanel } from "../../components/ui/tabPanel";
 import { TextField } from "../../components/ui/textField/textField.tsx";
 import { decksSlice } from "../../services/store.ts";
 import { CreateDeckPage } from "../CreateDeckPage/createDeckPage.tsx";
@@ -30,8 +22,6 @@ import SliderPage from "../sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";
 
 import s from "./Deks.module.scss";
-
-import loadedData = Simulate.loadedData;
 
 const headerDecksItems = [
   { key: "name", title: "Name" },
@@ -41,6 +31,7 @@ const headerDecksItems = [
 ];
 
 const Deks = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.decksSlice.currentPage);
   const authorId = useAppSelector((state) => state.decksSlice.authorId);
@@ -87,11 +78,14 @@ const Deks = () => {
       .unwrap()
       .then(() => {
         toast.success("Deleted");
+      })
+      .catch((e) => {
+        toast.error(`${e.data.message}`);
       });
   };
 
-  // if (!data?.items) {
-  //   return <Navigate to={"/login"} />;
+  // if (LogOutData) {
+  //   navigate("/login");
   // }
 
   return (

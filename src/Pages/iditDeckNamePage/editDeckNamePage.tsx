@@ -27,7 +27,10 @@ export const EditDeckPage: React.FC<CreateType> = ({
     editCard({ name: data.question, id: id })
       .unwrap()
       .then(() => {
-        toast.success("Success");
+        toast.success("Success deck name was changed");
+      })
+      .catch(() => {
+        toast.error(`You can't modify a deck that you don't own"`);
       });
     lazyFunc();
     callback && callback();

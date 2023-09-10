@@ -37,7 +37,7 @@ const MainLayout = () => {
   };
 
   const onClickHandler = () => {
-    navigate("/");
+    navigate("/decks");
     dispatch(decksSlice.actions.setAuthorId(""));
   };
 
@@ -54,6 +54,7 @@ const MainLayout = () => {
             navigate={onClickHandler}
           >
             <DropdownMenuComponent
+              img={data?.avatar}
               data={data}
               arrItems={["My Profile", "Sign Out"]}
             />

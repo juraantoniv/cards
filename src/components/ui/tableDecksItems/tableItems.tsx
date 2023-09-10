@@ -42,7 +42,6 @@ export const TableDecksItems = ({
 }: PropsType) => {
   const [sort, setSort] = useState<SortType>(null);
   const handlerSort = (key: string) => {
-    console.log(key);
     if (key !== "action") {
       if (sort && sort.key === key) {
         const updatedSort: SortType = {

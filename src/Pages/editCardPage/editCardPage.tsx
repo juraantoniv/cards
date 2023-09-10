@@ -8,6 +8,7 @@ type editType = {
   callback?: () => void;
   headerName?: string;
   editModeCard: boolean;
+  editCardHandler: (data: createDecks) => void;
 };
 const EditCardPage: React.FC<editType> = ({
   id,
@@ -15,6 +16,7 @@ const EditCardPage: React.FC<editType> = ({
 
   callback,
   editModeCard,
+  editCardHandler: EditHandler,
 }) => {
   const [editCard, {}] = useEditCardMutation();
 
@@ -23,7 +25,7 @@ const EditCardPage: React.FC<editType> = ({
   };
 
   const editCardHandler = (data: createDecks) => {
-    editCard({ question: data.question, answer: data.answer, id: id });
+    EditHandler(data);
   };
 
   return (

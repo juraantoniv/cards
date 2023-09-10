@@ -5,10 +5,10 @@
   align-items: center;
   justify-content: center;
 
-  width: 420px;
-  margin-top: 150px;
+  padding-top: 20px;
 
   background: var(--color-dark-700);
+  border: 1px solid var(--dark-500, #333);
 }
 
 .text {

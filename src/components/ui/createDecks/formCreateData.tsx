@@ -2,14 +2,11 @@ import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { z } from "zod";
 
 import {
   useGetByIdQuery,
   useGetCardByIdQuery,
-  useGetDecksByIdQuery,
 } from "../../../../decs-query.ts";
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
@@ -42,7 +39,7 @@ type createDecksType = {
   id?: string;
   func?: (question: string, answer: string) => void;
   editModeCard?: boolean;
-  dataHandler: (data: createDecks) => void;
+  dataHandler?: (data: createDecks) => void;
   carId?: string;
   setData?: (data: any) => void;
 };

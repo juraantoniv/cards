@@ -17,12 +17,12 @@ type FormData = {
   id: string;
 };
 
-type FileUpload = {
+type FileUploadType = {
   id: string;
   setData?: (data: any) => void;
 };
 
-export const FileUpload: React.FC<FileUpload> = ({ id, setData }) => {
+export const FileUpload: React.FC<FileUploadType> = ({ id, setData }) => {
   const { register, control, handleSubmit } = useForm<FormData>();
 
   const [createCard, {}] = useCreateCardMutation();
@@ -35,10 +35,6 @@ export const FileUpload: React.FC<FileUpload> = ({ id, setData }) => {
 
     formData.append("answerImg", data.cover1[0]);
     formData.append("answer", "asd1");
-    if (setData) {
-      setData(formData);
-    }
-
     createCard({ id, data: formData });
   };
 
