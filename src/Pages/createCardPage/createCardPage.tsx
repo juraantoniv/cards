@@ -26,6 +26,7 @@ export const CreateCardPage: React.FC<CreateType> = ({
         callback={callback}
         forEditFlag={forEditFlag}
         editModeCard={true}
+        question={"Question"}
       />
     </>
   );

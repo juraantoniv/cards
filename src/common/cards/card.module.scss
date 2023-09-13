@@ -11,7 +11,7 @@
 .form {
   position: absolute;
   top: 60px;
-  left: 55%;
+  left: 35%;
 }
 
 .header {
@@ -40,5 +40,17 @@
 .show {
   position: absolute;
   top: 120px;
-  right: 65%;
+  right: 60%;
+}
+
+.showDel {
+  position: absolute;
+  top: 120px;
+  right: 60%;
+}
+
+.showEdit {
+  position: absolute;
+  top: 120px;
+  right: 32%;
 }

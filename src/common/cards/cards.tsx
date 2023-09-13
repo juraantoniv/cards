@@ -59,8 +59,6 @@ const Cards = () => {
 
   const [editCard, {}] = useEditCardMutation();
 
-  console.log(deckName);
-
   const [createCard, {}] = useCreateCardMutation();
   const [delDeck, {}] = useDeleteDeckMutation();
 
@@ -116,11 +114,10 @@ const Cards = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
     dispatch(decksSlice.actions.setAuthorId(""));
     lasyFunc();
-    navigate("/decks");
+    navigate("/");
   };
 
   const editCardHandler = (data: createDecks) => {
-    console.log(data);
     editCard({ question: data.question, answer: data.answer, id: CardId })
       .unwrap()
       .catch((e) => {
@@ -227,16 +224,17 @@ const Cards = () => {
             callback={closeFormHandler}
             headerName={"EditCard"}
             editModeCard={true}
+            question={"Question"}
           />
         </div>
       )}
       {showDeleteForm && (
-        <div className={s.show}>
+        <div className={s.showDel}>
           <Delete hide={delMode} callback={deleteDeck} />
         </div>
       )}
       {editForm && (
-        <div className={s.show}>
+        <div className={s.showEdit}>
           <EditDeckPage
             forEditFlag={true}
             id={id}

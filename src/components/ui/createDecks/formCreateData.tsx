@@ -42,6 +42,7 @@ type createDecksType = {
   dataHandler?: (data: createDecks) => void;
   carId?: string;
   setData?: (data: any) => void;
+  question?: string;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
@@ -56,6 +57,7 @@ export const DecksForm: React.FC<createDecksType> = ({
   editModeCard,
   carId,
   setData,
+  question,
 }) => {
   const { data: deck } = useGetByIdQuery({
     id: id,
@@ -94,6 +96,8 @@ export const DecksForm: React.FC<createDecksType> = ({
     }
   };
 
+  console.log(question);
+
   return (
     <CardComponent className={st.common}>
       <div className={st.header}>
@@ -113,7 +117,7 @@ export const DecksForm: React.FC<createDecksType> = ({
           <div className={st.centerCommonent}>
             <ControlTextField
               sizeWidthTextField="484px"
-              label={headerName === forEditFlag ? "Question" : "Create"}
+              label={question}
               type="text"
               name="question"
               control={control}
@@ -143,7 +147,11 @@ export const DecksForm: React.FC<createDecksType> = ({
               </Button>
               <Button type={"submit"} className={st.but2}>
                 <Typography variant={"body2"}>
-                  {headerName === forEditFlag ? "Edit" : "Create"}
+                  {forEditFlag
+                    ? "Edit"
+                    : headerName === "EditCard"
+                    ? "Edit"
+                    : "Create"}
                 </Typography>
               </Button>
             </div>

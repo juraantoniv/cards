@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 import { useMeQuery } from "../../../services/decs-query.ts";
 import { decksSlice } from "../../../services/slices.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
+import { Login } from "../login/index.ts";
 
 const style = {
   display: "flex",
@@ -31,12 +32,12 @@ const MainLayout = () => {
 
   const { data, isLoading } = useMeQuery();
 
-  const logIN = () => {
+  const logIN = useCallback(() => {
     navigate("/login");
-  };
+  }, []);
 
   const onClickHandler = () => {
-    navigate("/decks");
+    navigate("");
     dispatch(decksSlice.actions.setAuthorId(""));
   };
 
@@ -59,7 +60,7 @@ const MainLayout = () => {
             />
           </Header>
 
-          {/*{!data ? <Login /> : <Outlet />}*/}
+          {/*{data === null ? <Login /> : <Outlet />}*/}
           {/*{location.pathname.endsWith("/register") ? (*/}
           {/*  <div style={{ position: "absolute", left: "39%" }}>*/}
           {/*    <Outlet />*/}

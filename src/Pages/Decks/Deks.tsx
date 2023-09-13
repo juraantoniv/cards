@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { navigate } from "@storybook/addon-links";
@@ -37,7 +37,7 @@ const Deks = () => {
   const authorId = useAppSelector((state) => state.decksSlice.authorId);
   const load = useAppSelector((state) => state.decksSlice.isLoading);
 
-  const { data: LogOutData } = useMeQuery();
+  const { data: LogOutData, error } = useMeQuery();
 
   const orderBy: decksResponse = useAppSelector(
     (state) => state.decksSlice.orderBy,
@@ -63,6 +63,8 @@ const Deks = () => {
     maxCardsCount: `${countCards[1]}`,
   });
 
+  console.log(error);
+
   const [delDeck, {}] = useDeleteDeckMutation();
 
   function onChangeHandler() {
@@ -84,9 +86,11 @@ const Deks = () => {
       });
   };
 
-  // if (LogOutData) {
-  //   navigate("/login");
-  // }
+  useEffect(() => {
+    if (LogOutData) return;
+
+    navigate("/login");
+  }, []);
 
   return (
     <div className={s.box}>

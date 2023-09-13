@@ -18,11 +18,7 @@ import ProfilePage from "./src/Pages/ProfilePage/ProfilePage.tsx";
 
 const privateRoutes: RouteObject[] = [
   {
-    path: "",
-    element: <Deks />,
-  },
-  {
-    path: "/decks",
+    path: "/",
     element: <Deks />,
   },
   {
@@ -34,7 +30,7 @@ const privateRoutes: RouteObject[] = [
     element: <Login />,
   },
   {
-    path: "decks/:id",
+    path: ":id",
     element: <Cards />,
   },
   {

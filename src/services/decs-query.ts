@@ -127,6 +127,9 @@ const extendedApi = baseApi.injectEndpoints({
             url: `/v1/auth/me`,
           };
         },
+        extraOptions: {
+          maxRetries: 0,
+        },
         providesTags: ["Decks"],
       }),
       meEditNickname: builder.mutation<meType, authEdit>({

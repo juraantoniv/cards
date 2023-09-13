@@ -32,14 +32,13 @@ export const Login = () => {
     resolver: zodResolver(loginSchema),
   });
   const handlerOnSubmit = (data: FormLoginType) => {
-    console.log(data);
     toast.info("Loading");
     logIn(data)
       .unwrap()
       .then(() => {
         toast.success("Success");
         dispatch(decksSlice.actions.loadDecks(false));
-        navigate("/decks");
+        navigate("/");
       })
       .catch(() => {
         toast.error("Wrong login or password");
