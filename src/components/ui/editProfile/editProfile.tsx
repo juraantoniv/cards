@@ -2,11 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
 import {
   useMeEditNicknameMutation,
   useMeQuery,
-} from "../../../../decs-query.ts";
-import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
+} from "../../../services/decs-query.ts";
 import { AvatarDemo } from "../avatar/avatar.tsx";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";

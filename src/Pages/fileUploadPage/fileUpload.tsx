@@ -1,12 +1,11 @@
 import * as React from "react";
-import { ChangeEvent, useState } from "react";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
-import { useForm, UseFormRegisterReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import { useCreateCardMutation } from "../../../decs-query.ts";
 import { Button } from "../../components/ui/button/button.tsx";
+import { useCreateCardMutation } from "../../services/decs-query.ts";
 
 import s from "./fileUpload.module.scss";
 
@@ -23,7 +22,7 @@ type FileUploadType = {
 };
 
 export const FileUpload: React.FC<FileUploadType> = ({ id, setData }) => {
-  const { register, control, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const [createCard, {}] = useCreateCardMutation();
 

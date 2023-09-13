@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { customFetchBase } from "./src/base-api-with-refetch.ts";
+import { customFetchBase } from "../base-api-with-refetch.ts";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",

@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
+import { useAppDispatch, useAppSelector } from "../../../store.ts";
+import IconDotsVerticalCircle from "../../assets/icons/iconDots.tsx";
+import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
+import { Delete } from "../../components/deletePopComponent/detete.tsx";
+import { Button } from "../../components/ui/button";
+import { createDecks } from "../../components/ui/createDecks";
+import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
+import { Memo } from "../../components/ui/notFound/notFoundPage.tsx";
+import { TableDecksItems } from "../../components/ui/tableDecksItems";
+import { TextField } from "../../components/ui/textField";
+import { Typography } from "../../components/ui/typography";
+import { CreateCardPage } from "../../Pages/createCardPage/createCardPage.tsx";
+import EditCardPage from "../../Pages/editCardPage/editCardPage.tsx";
+import { EditDeckPage } from "../../Pages/iditDeckNamePage/editDeckNamePage.tsx";
 import {
   useCreateCardMutation,
   useDeleteCardMutation,
@@ -17,23 +26,8 @@ import {
   useGetCardsQuery,
   useGetDecksByIdQuery,
   useLazyGetDecksQuery,
-} from "../../../decs-query.ts";
-import { useAppDispatch, useAppSelector } from "../../../store.ts";
-import IconDotsVerticalCircle from "../../assets/icons/iconDots.tsx";
-import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
-import { Delete } from "../../components/deletePopComponent/detete.tsx";
-import { Button } from "../../components/ui/button";
-import { createDecks, DecksForm } from "../../components/ui/createDecks";
-import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
-import { Memo } from "../../components/ui/notFound/notFoundPage.tsx";
-import { TableDecksItems } from "../../components/ui/tableDecksItems";
-import { TextField } from "../../components/ui/textField";
-import { Typography } from "../../components/ui/typography";
-import { CreateCardPage } from "../../Pages/createCardPage/createCardPage.tsx";
-import { CreateDeckPage } from "../../Pages/CreateDeckPage/createDeckPage.tsx";
-import EditCardPage from "../../Pages/editCardPage/editCardPage.tsx";
-import { EditDeckPage } from "../../Pages/iditDeckNamePage/editDeckNamePage.tsx";
-import { decksSlice } from "../../services/store.ts";
+} from "../../services/decs-query.ts";
+import { decksSlice } from "../../services/slices.ts";
 
 import s from "./card.module.scss";
 

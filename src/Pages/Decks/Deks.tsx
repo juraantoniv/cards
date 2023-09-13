@@ -6,17 +6,17 @@ import { Simulate } from "react-dom/test-utils";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-import {
-  useDeleteDeckMutation,
-  useGetDecksQuery,
-  useMeQuery,
-} from "../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
 import { decksResponse } from "../../../types.ts";
 import { Button } from "../../components/ui/button";
 import { TableDecks } from "../../components/ui/tableDecks";
 import { TextField } from "../../components/ui/textField/textField.tsx";
-import { decksSlice } from "../../services/store.ts";
+import {
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useMeQuery,
+} from "../../services/decs-query.ts";
+import { decksSlice } from "../../services/slices.ts";
 import { CreateDeckPage } from "../CreateDeckPage/createDeckPage.tsx";
 import SliderPage from "../sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";

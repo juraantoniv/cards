@@ -1,13 +1,10 @@
-import * as child_process from "child_process";
+import { decksResponse } from "../../types.ts";
+import { meType } from "../components/ui/layout/MainLayout.tsx";
+import { lernType } from "../components/ui/learnPackComponent";
+import { FormLoginType } from "../components/ui/login";
+import { FormValuesReg } from "../userRegisterForm.tsx";
 
-import { baseApi } from "./base-api";
-import { FormValues } from "./src/components/ui/auth/login-form/login-from.tsx";
-import { meType } from "./src/components/ui/layout/MainLayout.tsx";
-import { lernType } from "./src/components/ui/learnPackComponent";
-import { FormLoginType } from "./src/components/ui/login";
-import { decksSlice } from "./src/services/store.ts";
-import { FormValuesReg } from "./src/userRegisterForm.tsx";
-import { decksResponse, userRegisterType } from "./types.ts";
+import { baseApi } from "./base-api.tsx";
 
 type getDecksArgs = {
   minCardsCount?: string;
@@ -212,7 +209,7 @@ const extendedApi = baseApi.injectEndpoints({
       }),
       setRate: builder.mutation<
         any,
-        { id: string; cardId: string; grade: number }
+        { id: string; cardId: string | undefined; grade: number }
       >({
         query: (arg) => {
           return {

@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import {
-  useGetByIdQuery,
-  useGetCardByIdQuery,
-} from "../../../../decs-query.ts";
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
 import { FileUpload } from "../../../Pages/fileUploadPage/fileUpload.tsx";
+import {
+  useGetByIdQuery,
+  useGetCardByIdQuery,
+} from "../../../services/decs-query.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { SelectControl } from "../select";

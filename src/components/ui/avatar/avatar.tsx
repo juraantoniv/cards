@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 
 import * as Avatar from "@radix-ui/react-avatar";
 
-import { useMeQuery } from "../../../../decs-query.ts";
+import { useMeQuery } from "../../../services/decs-query.ts";
 
 import s from "./avatar.module.scss";
 

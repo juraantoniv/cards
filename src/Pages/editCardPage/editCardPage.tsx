@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useEditCardMutation } from "../../../decs-query.ts";
 import { createDecks, DecksForm } from "../../components/ui/createDecks";
+import { useEditCardMutation } from "../../services/decs-query.ts";
 
 type editType = {
   id?: string;

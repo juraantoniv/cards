@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import { useRecoveryPasswordMutation } from "../../../../decs-query.ts";
 import { useAppDispatch } from "../../../../store.ts";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
-import { decksSlice } from "../../../services/store.ts";
+import { useRecoveryPasswordMutation } from "../../../services/decs-query.ts";
+import { decksSlice } from "../../../services/slices.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";

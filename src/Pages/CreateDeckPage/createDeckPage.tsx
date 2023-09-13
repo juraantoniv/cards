@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useCreateDeckMutation } from "../../../decs-query.ts";
 import { createDecks, DecksForm } from "../../components/ui/createDecks";
+import { useCreateDeckMutation } from "../../services/decs-query.ts";
 
 type CreateType = {
   id?: string;

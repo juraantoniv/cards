@@ -16,14 +16,11 @@ import Deks from "./src/Pages/Decks/Deks.tsx";
 import LearnPage from "./src/Pages/learnPage/learnPage.tsx";
 import ProfilePage from "./src/Pages/ProfilePage/ProfilePage.tsx";
 
-// const publicRoutes: RouteObject[] = [
-//   {
-//     path: "/login",
-//     element: <LoginForm />,
-//   },
-// ];
-
 const privateRoutes: RouteObject[] = [
+  {
+    path: "",
+    element: <Deks />,
+  },
   {
     path: "/decks",
     element: <Deks />,

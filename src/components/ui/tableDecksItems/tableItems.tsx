@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import Rating from "@mui/material/Rating";
 
-import { carsdType } from "../../../../decs-query.ts";
 import { ArrowIconDown } from "../../../assets/icons/arrowIconDown.tsx";
 import { ArrowUpIcon } from "../../../assets/icons/arrowUpIcon.tsx";
 import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
+import { carsdType } from "../../../services/decs-query.ts";
 import { RatingComponent } from "../starRating/startRatingComponent.tsx";
 
 import st from "./tableDecks.module.scss";

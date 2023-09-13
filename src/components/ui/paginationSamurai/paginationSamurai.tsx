@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { useGetDecksQuery } from "../../../../decs-query.ts";
 import { useAppDispatch, useAppSelector } from "../../../../store.ts";
 import { decksResponse } from "../../../../types.ts";
 import { IconArrow } from "../../../assets/icons/iconArrow.tsx";
-import { decksSlice } from "../../../services/store.ts";
+import { useGetDecksQuery } from "../../../services/decs-query.ts";
+import { decksSlice } from "../../../services/slices.ts";
 import { SelectControl } from "../select";
 
 import st from "./paginationSamurai.module.scss";

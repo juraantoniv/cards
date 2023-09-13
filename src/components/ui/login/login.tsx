@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { z } from "zod";
 
-import { useLogInMutation } from "../../../../decs-query.ts";
 import { useAppDispatch } from "../../../../store.ts";
 import { ControlCheckbox2 } from "../../../common/controlCheckbox2/controlCheckbox2.tsx";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
-import { decksSlice } from "../../../services/store.ts";
+import { useLogInMutation } from "../../../services/decs-query.ts";
+import { decksSlice } from "../../../services/slices.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";

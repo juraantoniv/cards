@@ -5,8 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 import { omit } from "remeda";
 import { z } from "zod";
 
-import { useCreateUserMutation } from "../../../../decs-query.ts";
 import { ControlTextField } from "../../../common/controlTextField/controlTextField.tsx";
+import { useCreateUserMutation } from "../../../services/decs-query.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";

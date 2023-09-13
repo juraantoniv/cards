@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { useMeQuery } from "../../../decs-query.ts";
 import { DecksForm } from "../../components/ui/createDecks";
 import { Profile } from "../../components/ui/profile";
+import { useMeQuery } from "../../services/decs-query.ts";
 
 import s from "./ProfilePage.module.scss";
 

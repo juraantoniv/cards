@@ -1,23 +1,22 @@
 import React from "react";
 
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import {
-  useGetRandomCardQuery,
-  useSetRateMutation,
-} from "../../../decs-query.ts";
 import { useAppSelector } from "../../../store.ts";
 import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
 import { Button } from "../../components/ui/button";
 import Learn from "../../components/ui/learnPackComponent/learn.tsx";
 import { Typography } from "../../components/ui/typography";
-import { decksSlice } from "../../services/store.ts";
+import {
+  useGetRandomCardQuery,
+  useSetRateMutation,
+} from "../../services/decs-query.ts";
+import { decksSlice } from "../../services/slices.ts";
 
 import sx from "./ratePage.module.scss";
 
 const RatePage = () => {
-  const { id: params } = useParams();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -33,12 +32,12 @@ const RatePage = () => {
   const [setRate] = useSetRateMutation();
 
   const onclickHandler = () => {
-    dispatch(decksSlice.actions.setPrevious(data.id));
+    dispatch(decksSlice.actions.setPrevious(data?.id));
     navigate("/learn");
   };
 
   const onChangeValueHandler = (value: string) => {
-    setRate({ id: id, cardId: data.id, grade: Number(value) });
+    setRate({ id: id, cardId: data?.id, grade: Number(value) });
   };
 
   const naw = () => {

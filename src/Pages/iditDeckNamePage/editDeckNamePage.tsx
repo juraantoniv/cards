@@ -2,11 +2,11 @@ import React from "react";
 
 import { toast } from "react-toastify";
 
+import { createDecks, DecksForm } from "../../components/ui/createDecks";
 import {
   useEditDeckMutation,
   useLazyGetDecksQuery,
-} from "../../../decs-query.ts";
-import { createDecks, DecksForm } from "../../components/ui/createDecks";
+} from "../../services/decs-query.ts";
 
 type CreateType = {
   id?: string;

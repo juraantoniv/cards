@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
+import { useAppDispatch, useAppSelector } from "../../../store.ts";
+import { TabPanel } from "../../components/ui/tabPanel";
 import {
   useGetCardsByIdQuery,
   useGetDecksQuery,
   useLazyGetDecksQuery,
-} from "../../../decs-query.ts";
-import { useAppDispatch, useAppSelector } from "../../../store.ts";
-import { TabPanel } from "../../components/ui/tabPanel";
-import { decksSlice } from "../../services/store.ts";
+} from "../../services/decs-query.ts";
+import { decksSlice } from "../../services/slices.ts";
 
 const myId = "f4333448-5615-447f-beca-5893d431d8fe";
 

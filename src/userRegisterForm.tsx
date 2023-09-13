@@ -5,7 +5,7 @@ import { useController, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-import { useCreateUserMutation } from "../decs-query.ts";
+import { useCreateUserMutation } from "./services/decs-query.ts";
 
 export type FormValuesReg = z.infer<typeof loginSchema>;
 
