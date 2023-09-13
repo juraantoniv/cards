@@ -43,33 +43,30 @@ const MainLayout = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <LinearProgress />
-      ) : (
-        <div style={style}>
-          <Header
-            name={data?.name}
-            logIn={!!data}
-            callback={logIN}
-            navigate={onClickHandler}
-          >
-            <DropdownMenuComponent
-              img={data?.avatar}
-              data={data}
-              arrItems={["My Profile", "Sign Out"]}
-            />
-          </Header>
+      {isLoading ? <LinearProgress style={{ zIndex: "100" }} /> : null}
+      <div style={style}>
+        <Header
+          name={data?.name}
+          logIn={!!data}
+          callback={logIN}
+          navigate={onClickHandler}
+        >
+          <DropdownMenuComponent
+            img={data?.avatar}
+            data={data}
+            arrItems={["My Profile", "Sign Out"]}
+          />
+        </Header>
 
-          {/*{data === null ? <Login /> : <Outlet />}*/}
-          {/*{location.pathname.endsWith("/register") ? (*/}
-          {/*  <div style={{ position: "absolute", left: "39%" }}>*/}
-          {/*    <Outlet />*/}
-          {/*  </div>*/}
-          {/*) : null}*/}
+        {/*{data === null ? <Login /> : <Outlet />}*/}
+        {/*{location.pathname.endsWith("/register") ? (*/}
+        {/*  <div style={{ position: "absolute", left: "39%" }}>*/}
+        {/*    <Outlet />*/}
+        {/*  </div>*/}
+        {/*) : null}*/}
 
-          <Outlet />
-        </div>
-      )}
+        <Outlet />
+      </div>
     </div>
   );
 };
