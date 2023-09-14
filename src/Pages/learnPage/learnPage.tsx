@@ -1,11 +1,9 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useAppSelector } from "../../../store.ts";
 import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
-import s from "../../common/cards/card.module.scss";
 import { Button } from "../../components/ui/button";
 import Learn from "../../components/ui/learnPackComponent/learn.tsx";
 import { Typography } from "../../components/ui/typography";

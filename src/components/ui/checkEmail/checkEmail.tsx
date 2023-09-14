@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../../../store.ts";
-import { decksResponse } from "../../../../types.ts";
 import { IconForComponentCheckEmail } from "../../../assets/icons/iconForComponentCheckEmail.tsx";
-import { useMeQuery } from "../../../services/decs-query.ts";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";

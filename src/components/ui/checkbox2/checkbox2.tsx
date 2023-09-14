@@ -1,22 +1,22 @@
-import { FC } from 'react'
+import { FC } from "react";
 
-import * as CheckboxRadix from '@radix-ui/react-checkbox'
-import { CheckIcon } from '@radix-ui/react-icons'
-import * as Label from '@radix-ui/react-label'
+import * as CheckboxRadix from "@radix-ui/react-checkbox";
+import { CheckIcon } from "@radix-ui/react-icons";
+import * as Label from "@radix-ui/react-label";
 
-import { Typography } from '../typography'
+import { Typography } from "../typography";
 
-import s from './checkbox2.module.scss'
+import s from "./checkbox2.module.scss";
 
 export type CheckboxProps = {
-  checked?: boolean
-  onChangeChecked?: (value: boolean) => void
-  disabled?: boolean
-  label?: string
-  id?: string
-  className?: string
-  required?: boolean
-}
+  checked?: boolean;
+  onChangeChecked?: (value: boolean) => void;
+  disabled?: boolean;
+  label?: string;
+  id?: string;
+  className?: string;
+  required?: boolean;
+};
 
 export const Checkbox2: FC<CheckboxProps> = ({
   checked,
@@ -33,13 +33,13 @@ export const Checkbox2: FC<CheckboxProps> = ({
     checkedWrapper: `${s.checkedWrapper} ${disabled && s.disabled}`,
     checkboxRoot: `${s.CheckboxRoot} ${disabled && s.disabled}`,
     indicator: s.indicator,
-  }
+  };
 
   return (
     <form>
       <div className={classNames.container}>
         <Label.Root asChild>
-          <Typography variant="body2" className={classNames.label} as={'label'}>
+          <Typography variant="body2" className={classNames.label} as={"label"}>
             <div className={classNames.checkedWrapper}>
               <CheckboxRadix.Root
                 className={classNames.checkboxRoot}
@@ -60,5 +60,5 @@ export const Checkbox2: FC<CheckboxProps> = ({
         </Label.Root>
       </div>
     </form>
-  )
-}
+  );
+};

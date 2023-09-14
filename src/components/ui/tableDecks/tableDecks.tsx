@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../../../store.ts";
 import { ArrowIconDown } from "../../../assets/icons/arrowIconDown.tsx";
@@ -9,10 +9,8 @@ import { DeleteIcon } from "../../../assets/icons/deleteIcon.tsx";
 import { EditIcon } from "../../../assets/icons/editIcon.tsx";
 import { PlayIcon } from "../../../assets/icons/playIcon.tsx";
 import { EditDeckPage } from "../../../Pages/iditDeckNamePage/editDeckNamePage.tsx";
-import { useGetDecksQuery } from "../../../services/decs-query.ts";
 import { decksSlice } from "../../../services/slices.ts";
 import { Delete } from "../../deletePopComponent/detete.tsx";
-import { DecksForm } from "../createDecks";
 import { PaginationSamurai } from "../paginationSamurai";
 
 import st from "./tableDecks.module.scss";

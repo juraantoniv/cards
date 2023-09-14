@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
-import { navigate } from "@storybook/addon-links";
-import { Simulate } from "react-dom/test-utils";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
@@ -87,10 +85,12 @@ const Deks = () => {
   };
 
   useEffect(() => {
-    if (LogOutData) return;
-
-    navigate("/login");
-  }, []);
+    if (!LogOutData) {
+      return;
+    } else if (LogOutData) {
+      navigate("/");
+    }
+  }, [LogOutData]);
 
   return (
     <div className={s.box}>

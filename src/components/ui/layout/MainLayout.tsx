@@ -1,14 +1,13 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useDispatch } from "react-redux";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { useMeQuery } from "../../../services/decs-query.ts";
 import { decksSlice } from "../../../services/slices.ts";
 import { DropdownMenuComponent } from "../drop-down-menu";
 import { Header } from "../header";
-import { Login } from "../login/index.ts";
 
 const style = {
   display: "flex",

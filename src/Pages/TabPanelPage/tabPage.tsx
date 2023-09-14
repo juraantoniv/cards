@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../../store.ts";
+import { useAppDispatch } from "../../../store.ts";
 import { TabPanel } from "../../components/ui/tabPanel";
-import {
-  useGetCardsByIdQuery,
-  useGetDecksQuery,
-  useLazyGetDecksQuery,
-} from "../../services/decs-query.ts";
 import { decksSlice } from "../../services/slices.ts";
 
 const myId = "f4333448-5615-447f-beca-5893d431d8fe";
@@ -47,6 +42,3 @@ const TabPage = () => {
 };
 
 export default TabPage;
-function getUsers() {
-  throw new Error("Function not implemented.");
-}

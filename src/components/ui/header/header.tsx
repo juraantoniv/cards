@@ -1,7 +1,6 @@
 import { ComponentProps, FC, ReactNode } from "react";
 
 import { clsx } from "clsx";
-import { ToastContainer } from "react-toastify";
 
 import { Button } from "../button";
 import { Typography } from "../typography";

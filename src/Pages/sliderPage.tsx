@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store.ts";
 import { SliderBar } from "../components/ui/slider";
-import { useGetDecksQuery } from "../services/decs-query.ts";
 import { decksSlice } from "../services/slices.ts";
 
 const SliderPage = () => {

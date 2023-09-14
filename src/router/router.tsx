@@ -4,17 +4,17 @@ import {
   RouteObject,
 } from "react-router-dom";
 
-import Cards from "./src/common/cards/cards.tsx";
-import { CheckEmail } from "./src/components/ui/checkEmail";
-import { EditProfile } from "./src/components/ui/editProfile";
-import { ForgotYourPassword } from "./src/components/ui/forgotYourPassword";
-import MainLayout from "./src/components/ui/layout/MainLayout.tsx";
-import { Login } from "./src/components/ui/login";
-import { Register } from "./src/components/ui/register";
-import RatePage from "./src/Pages/answerPage/ratePage.tsx";
-import Deks from "./src/Pages/Decks/Deks.tsx";
-import LearnPage from "./src/Pages/learnPage/learnPage.tsx";
-import ProfilePage from "./src/Pages/ProfilePage/ProfilePage.tsx";
+import Cards from "../common/cards/cards.tsx";
+import { CheckEmail } from "../components/ui/checkEmail";
+import { EditProfile } from "../components/ui/editProfile";
+import { ForgotYourPassword } from "../components/ui/forgotYourPassword";
+import MainLayout from "../components/ui/layout/MainLayout.tsx";
+import { Login } from "../components/ui/login";
+import { Register } from "../components/ui/register";
+import RatePage from "../Pages/answerPage/ratePage.tsx";
+import Deks from "../Pages/Decks/Deks.tsx";
+import LearnPage from "../Pages/learnPage/learnPage.tsx";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage.tsx";
 
 const privateRoutes: RouteObject[] = [
   {
