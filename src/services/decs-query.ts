@@ -14,7 +14,7 @@ type getDecksArgs = {
   orderBy?: string;
   currentPage?: string;
   itemsPerPage?: string;
-} | void;
+};
 type Items = {
   id: string;
   deckId: string;
