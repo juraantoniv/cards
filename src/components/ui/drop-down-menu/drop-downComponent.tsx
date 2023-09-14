@@ -53,9 +53,6 @@ export const DropdownMenuComponent: React.FC<DropdownProps> = ({
   const toProfilePage = () => {
     navigate("/profile");
   };
-
-  const handler = () => {};
-
   const editMode = () => {
     dispatch(decksSlice.actions.editMode(true));
   };

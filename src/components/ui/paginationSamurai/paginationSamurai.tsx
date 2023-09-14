@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../../store.ts";
-import { decksResponse } from "../../../../types.ts";
 import { IconArrow } from "../../../assets/icons/iconArrow.tsx";
 import { useGetDecksQuery } from "../../../services/decs-query.ts";
 import { decksSlice } from "../../../services/slices.ts";
@@ -64,18 +63,18 @@ export const PaginationSamurai = ({ allElements }: PropsType) => {
     itemsPerPage: `${itemsPerPage}`,
   });
 
-  const fetchActivePageHandler = (numberPage: number) => {};
+  const fetchActivePageHandler = () => {};
 
   const onClickReturnPart = () => {
     if (part !== 1) {
       setPart(part - 1);
-      fetchActivePageHandler((part - 1) * sizeOnePart);
+      fetchActivePageHandler();
     }
   };
 
   const onClickNextPart = () => {
     if (part < maxPart) setPart(part + 1);
-    fetchActivePageHandler(part * sizeOnePart + 1);
+    fetchActivePageHandler();
   };
 
   const onClickHandler = (numberPage: any) => {

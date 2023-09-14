@@ -10,12 +10,6 @@ import { carsdType } from "../../../services/decs-query.ts";
 
 import st from "./tableDecks.module.scss";
 
-type DataItemType = {
-  title: string;
-  cardsCount: number;
-  updated: string;
-  createdBy: string;
-};
 type DataHeaderType = {
   key: string;
   title: string;

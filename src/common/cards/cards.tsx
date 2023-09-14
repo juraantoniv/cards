@@ -25,6 +25,7 @@ import {
   useEditCardMutation,
   useGetCardsQuery,
   useGetDecksByIdQuery,
+  useGetDecksQuery,
   useLazyGetDecksQuery,
 } from "../../services/decs-query.ts";
 import { decksSlice } from "../../services/slices.ts";
@@ -104,7 +105,7 @@ const Cards = () => {
     setShow(false);
   };
 
-  const [lasyFunc] = useLazyGetDecksQuery();
+  const { refetch } = useGetDecksQuery();
 
   const forEditHandler = (id: string) => {
     showEdit(true);
@@ -113,7 +114,7 @@ const Cards = () => {
   const naw = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
     dispatch(decksSlice.actions.setAuthorId(""));
-    lasyFunc();
+    refetch();
     navigate("/");
   };
 

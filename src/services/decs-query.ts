@@ -2,7 +2,6 @@ import { decksResponse } from "../../types.ts";
 import { meType } from "../components/ui/layout/MainLayout.tsx";
 import { lernType } from "../components/ui/learnPackComponent";
 import { FormLoginType } from "../components/ui/login";
-import { FormValuesReg } from "../userRegisterForm.tsx";
 
 import { baseApi } from "./base-api.tsx";
 
@@ -289,7 +288,7 @@ const extendedApi = baseApi.injectEndpoints({
           };
         },
       }),
-      createUser: builder.mutation<any, FormValuesReg>({
+      createUser: builder.mutation({
         query: (user) => {
           return {
             url: `/v1/auth/sign-up`,

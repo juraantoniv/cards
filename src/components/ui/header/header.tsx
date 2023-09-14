@@ -9,11 +9,11 @@ import s from "./header.module.scss";
 import im from "./Logo.png";
 
 export type HeaderProps = {
-  logIn: boolean;
-  children: ReactNode;
+  logIn?: boolean;
+  children?: ReactNode;
   name?: string;
-  callback: () => void;
-  navigate: () => void;
+  callback?: () => void;
+  navigate?: () => void;
 } & Omit<ComponentProps<"header">, "children">;
 
 const pointer = {

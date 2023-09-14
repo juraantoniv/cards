@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { omit } from "remeda";
 import { z } from "zod";
@@ -40,12 +40,11 @@ export type errorType = {
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
 
-type FormLoginType = z.infer<typeof loginSchema>;
+export type FormType = z.infer<typeof loginSchema>;
 export const Register = () => {
-  const [setUser, { isLoading }] = useCreateUserMutation();
-  const navigate = useNavigate();
+  const [setUser] = useCreateUserMutation();
 
-  const { handleSubmit, control } = useForm<FormLoginType>({
+  const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
     defaultValues: {
@@ -55,7 +54,7 @@ export const Register = () => {
     },
   });
 
-  const handlerOnSubmit = (data: FormLoginType) => {
+  const handlerOnSubmit = (data: FormType) => {
     setUser(omit(data, ["confirmPassword"]))
       .unwrap()
       .then(() => {
