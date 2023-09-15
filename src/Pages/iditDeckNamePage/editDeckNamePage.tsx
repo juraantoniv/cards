@@ -1,12 +1,7 @@
-import React from "react";
-
 import { toast } from "react-toastify";
 
 import { createDecks, DecksForm } from "../../components/ui/createDecks";
-import {
-  useEditDeckMutation,
-  useLazyGetDecksQuery,
-} from "../../services/decs-query.ts";
+import { useEditDeckMutation } from "../../services/decs-query.ts";
 
 type CreateType = {
   id?: string;
@@ -15,16 +10,16 @@ type CreateType = {
   forEditFlag: boolean;
 };
 
-export const EditDeckPage: React.FC<CreateType> = ({
+export const EditDeckPage = ({
   id,
-  headerName,
   callback,
+  headerName,
   forEditFlag,
-}) => {
+}: CreateType) => {
   const [editCard, {}] = useEditDeckMutation();
-  const [lazyFunc] = useLazyGetDecksQuery();
+
   const editCardHandler = (data: createDecks) => {
-    editCard({ name: data.question, id: id })
+    editCard({ name: data.question, id: id ? id : "" })
       .unwrap()
       .then(() => {
         toast.success("Success deck name was changed");
@@ -32,7 +27,7 @@ export const EditDeckPage: React.FC<CreateType> = ({
       .catch(() => {
         toast.error(`You can't modify a deck that you don't own"`);
       });
-    lazyFunc();
+
     callback && callback();
   };
 

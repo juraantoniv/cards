@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useAppDispatch } from "../../../store.ts";
 import { TabPanel } from "../../components/ui/tabPanel";

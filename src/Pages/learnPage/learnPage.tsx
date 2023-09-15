@@ -1,27 +1,19 @@
-import React from "react";
-
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../../store.ts";
 import IconWiDirectionLeft from "../../assets/icons/IconWiDirectionLeft.tsx";
 import { Button } from "../../components/ui/button";
 import Learn from "../../components/ui/learnPackComponent/learn.tsx";
 import { Typography } from "../../components/ui/typography";
-import {
-  useGetRandomCardQuery,
-  useLazyGetCardsQuery,
-  useLazyGetDecksQuery,
-} from "../../services/decs-query.ts";
+import { useGetRandomCardQuery } from "../../services/decs-query.ts";
 
 import sx from "./learPage.module.scss";
 
 const LearnPage = () => {
-  const { id: Params } = useParams();
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.decksSlice.id);
   const prevId = useAppSelector((state) => state.decksSlice.previousCard);
   const deckId = useAppSelector((state) => state.decksSlice.deckId);
-  const [lazyFunc] = useLazyGetCardsQuery();
 
   const { data } = useGetRandomCardQuery({
     id: `${id}`,
@@ -29,7 +21,6 @@ const LearnPage = () => {
   });
 
   const naw = () => {
-    lazyFunc();
     navigate(`/${deckId}`);
   };
 

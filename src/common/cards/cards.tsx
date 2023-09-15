@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,8 +25,6 @@ import {
   useEditCardMutation,
   useGetCardsQuery,
   useGetDecksByIdQuery,
-  useGetDecksQuery,
-  useLazyGetDecksQuery,
 } from "../../services/decs-query.ts";
 import { decksSlice } from "../../services/slices.ts";
 
@@ -105,8 +103,6 @@ const Cards = () => {
     setShow(false);
   };
 
-  const { refetch } = useGetDecksQuery();
-
   const forEditHandler = (id: string) => {
     showEdit(true);
     setCardId(id);
@@ -114,7 +110,6 @@ const Cards = () => {
   const naw = () => {
     dispatch(decksSlice.actions.showDeleteForm(false));
     dispatch(decksSlice.actions.setAuthorId(""));
-    refetch();
     navigate("/");
   };
 
@@ -133,7 +128,6 @@ const Cards = () => {
         .unwrap()
         .then(() => {
           toast.success("Deleted");
-          lasyFunc();
         });
       navigate("/");
     }
@@ -144,7 +138,7 @@ const Cards = () => {
   return (
     <div className={s.card}>
       <ToastContainer
-        posittion="top-right"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -194,10 +188,9 @@ const Cards = () => {
         />
       </div>
 
-      <div></div>
-      {isLoading ? (
-        <LinearProgress />
-      ) : data?.items?.length > 0 ? (
+      {isLoading ? <LinearProgress /> : null}
+
+      {data?.items && data?.items?.length > 0 ? (
         <TableDecksItems
           dataContentTable={data}
           callback={ShowItem}

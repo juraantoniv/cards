@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import { useAppDispatch, useAppSelector } from "../../../store.ts";
-import { decksResponse } from "../../../types.ts";
 import { Button } from "../../components/ui/button";
 import { TableDecks } from "../../components/ui/tableDecks";
-import { TextField } from "../../components/ui/textField/textField.tsx";
+import { TextField } from "../../components/ui/textField";
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
@@ -16,7 +15,7 @@ import {
 } from "../../services/decs-query.ts";
 import { decksSlice } from "../../services/slices.ts";
 import { CreateDeckPage } from "../CreateDeckPage/createDeckPage.tsx";
-import SliderPage from "../sliderPage.tsx";
+import SliderPage from "../sliderPage/sliderPage.tsx";
 import TabPage from "../TabPanelPage/tabPage.tsx";
 
 import s from "./Deks.module.scss";
@@ -28,18 +27,15 @@ const headerDecksItems = [
   { key: "created", title: "Created By" },
 ];
 
-const Deks = () => {
+const Decks = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const page = useAppSelector((state) => state.decksSlice.currentPage);
   const authorId = useAppSelector((state) => state.decksSlice.authorId);
-  const load = useAppSelector((state) => state.decksSlice.isLoading);
 
-  const { data: LogOutData, error } = useMeQuery();
+  const { data: LogOutData } = useMeQuery();
 
-  const orderBy: decksResponse = useAppSelector(
-    (state) => state.decksSlice.orderBy,
-  );
+  const orderBy = useAppSelector((state) => state.decksSlice.orderBy);
 
   const countCards = useAppSelector((state) => state.decksSlice.cardsCount);
 
@@ -60,8 +56,6 @@ const Deks = () => {
     minCardsCount: `${countCards[0]}`,
     maxCardsCount: `${countCards[1]}`,
   });
-
-  console.log(error);
 
   const [delDeck, {}] = useDeleteDeckMutation();
 
@@ -145,4 +139,4 @@ const Deks = () => {
   );
 };
 
-export default Deks;
+export default Decks;

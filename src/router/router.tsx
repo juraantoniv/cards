@@ -12,14 +12,14 @@ import MainLayout from "../components/ui/layout/MainLayout.tsx";
 import { Login } from "../components/ui/login";
 import { Register } from "../components/ui/register";
 import RatePage from "../Pages/answerPage/ratePage.tsx";
-import Deks from "../Pages/Decks/Deks.tsx";
+import Decks from "../Pages/Decks/Decks.tsx";
 import LearnPage from "../Pages/learnPage/learnPage.tsx";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage.tsx";
 
 const privateRoutes: RouteObject[] = [
   {
     path: "/",
-    element: <Deks />,
+    element: <Decks />,
   },
   {
     path: "/register",

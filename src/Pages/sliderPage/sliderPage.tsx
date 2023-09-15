@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-
-import { useAppDispatch, useAppSelector } from "../../store.ts";
-import { SliderBar } from "../components/ui/slider";
-import { decksSlice } from "../services/slices.ts";
+import { useAppDispatch, useAppSelector } from "../../../store.ts";
+import { SliderBar } from "../../components/ui/slider";
+import { decksSlice } from "../../services/slices.ts";
 
 const SliderPage = () => {
   const dispatch = useAppDispatch();
