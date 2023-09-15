@@ -248,34 +248,34 @@ const extendedApi = baseApi.injectEndpoints({
             method: "POST",
           };
         },
-        async onQueryStarted(_, { dispatch, queryFulfilled }) {
-          // @ts-ignore
-          const patchResult = dispatch(
-            baseApi.util.updateQueryData("me", undefined, () => {
-              return null;
-            }),
-          );
-
-          // @ts-ignore
-          const patchResultDecks = dispatch(
-            baseApi.util.updateQueryData("getDecks", undefined, () => {
-              return null;
-            }),
-          );
-
-          try {
-            await queryFulfilled;
-          } catch {
-            patchResult.undo();
-            patchResultDecks.undo();
-
-            /**
-             * Alternatively, on failure you can invalidate the corresponding cache tags
-             * to trigger a re-fetch:
-             * dispatch(api.util.invalidateTags(['Post']))
-             */
-          }
-        },
+        // async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        //   // @ts-ignore
+        //   const patchResult = dispatch(
+        //     baseApi.util.updateQueryData("me", undefined, () => {
+        //       return null;
+        //     }),
+        //   );
+        //
+        //   // @ts-ignore
+        //   const patchResultDecks = dispatch(
+        //     baseApi.util.updateQueryData("getDecks", undefined, () => {
+        //       return null;
+        //     }),
+        //   );
+        //
+        //   try {
+        //     await queryFulfilled;
+        //   } catch {
+        //     patchResult.undo();
+        //     patchResultDecks.undo();
+        //
+        //     /**
+        //      * Alternatively, on failure you can invalidate the corresponding cache tags
+        //      * to trigger a re-fetch:
+        //      * dispatch(api.util.invalidateTags(['Post']))
+        //      */
+        //   }
+        // },
       }),
       recoveryPassword: builder.mutation<any, string>({
         query: (email) => {
