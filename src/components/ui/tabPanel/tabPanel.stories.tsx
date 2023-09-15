@@ -1,64 +1,79 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import * as Tabs from '@radix-ui/react-tabs'
-import { action } from '@storybook/addon-actions'
-import { Meta, StoryObj } from '@storybook/react'
+import * as Tabs from "@radix-ui/react-tabs";
+import { action } from "@storybook/addon-actions";
+import { Meta, StoryObj } from "@storybook/react";
 
-import st from './tabPanel.module.scss'
-import { itemTabType, TabPanel } from './tabPanel.tsx'
+import st from "./tabPanel.module.scss";
+import { itemTabType, TabPanel } from "./tabPanel.tsx";
 
 const meta = {
-  title: 'Components/TabPanel',
+  title: "Components/TabPanel",
   component: TabPanel,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {},
-} satisfies Meta<typeof TabPanel>
+} satisfies Meta<typeof TabPanel>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const TabPanel1: Story = {
   args: {
     data: [
-      { id: 'tab1', name: 'My', onClick: action('ClickMy'), disabled: false },
-      { id: 'tab2', name: 'All', onClick: action('ClickAll'), disabled: false },
-      { id: 'tab3', name: 'Трейтья', onClick: action('ClickТретья'), disabled: false },
+      { id: "tab1", name: "My", onClick: action("ClickMy"), disabled: false },
+      { id: "tab2", name: "All", onClick: action("ClickAll"), disabled: false },
+      {
+        id: "tab3",
+        name: "Трейтья",
+        onClick: action("ClickТретья"),
+        disabled: false,
+      },
     ],
-    active: 'My',
-    title: 'Title',
+    active: "My",
+    title: "Title",
   },
-}
+};
 
 export const TabPanel2: Story = {
   args: {
     data: [
-      { id: 'tab1', name: 'My', onClick: action('ClickMy'), disabled: false },
-      { id: 'tab2', name: 'All', onClick: action('ClickAll'), disabled: false },
-      { id: 'tab3', name: 'Трейтья', onClick: action('ClickТретья'), disabled: false },
+      { id: "tab1", name: "My", onClick: action("ClickMy"), disabled: false },
+      { id: "tab2", name: "All", onClick: action("ClickAll"), disabled: false },
+      {
+        id: "tab3",
+        name: "Трейтья",
+        onClick: action("ClickТретья"),
+        disabled: false,
+      },
     ],
-    active: 'All',
-    title: 'Title',
+    active: "All",
+    title: "Title",
   },
-}
+};
 
 export const TabPanelAction: Story = {
   render: () => {
-    const [active, setActive] = useState('My')
+    const [active, setActive] = useState("My");
 
     const handlerTabPanel1 = (name: string) => {
-      setActive(name)
-    }
+      setActive(name);
+    };
     const handlerTabPanel2 = (name: string) => {
-      setActive(name)
-    }
+      setActive(name);
+    };
     const handlerTabPanel3 = (name: string) => {
-      setActive(name)
-    }
+      setActive(name);
+    };
     const data = [
-      { id: 'tab1', name: 'My', onClick: handlerTabPanel1, disabled: false },
-      { id: 'tab2', name: 'All', onClick: handlerTabPanel2, disabled: false },
-      { id: 'tab3', name: 'Трейтья', onClick: handlerTabPanel3, disabled: false },
-    ]
+      { id: "tab1", name: "My", onClick: handlerTabPanel1, disabled: false },
+      { id: "tab2", name: "All", onClick: handlerTabPanel2, disabled: false },
+      {
+        id: "tab3",
+        name: "Трейтья",
+        onClick: handlerTabPanel3,
+        disabled: false,
+      },
+    ];
 
     return (
       <Tabs.Root>
@@ -74,19 +89,24 @@ export const TabPanelAction: Story = {
               >
                 {e.name}
               </Tabs.Trigger>
-            )
+            );
           })}
         </Tabs.List>
       </Tabs.Root>
-    )
+    );
   },
   args: {
     data: [
-      { id: 'tab1', name: 'My', onClick: action('ClickMy'), disabled: false },
-      { id: 'tab2', name: 'All', onClick: action('ClickAll'), disabled: false },
-      { id: 'tab3', name: 'Трейтья', onClick: action('ClickТретья'), disabled: false },
+      { id: "tab1", name: "My", onClick: action("ClickMy"), disabled: false },
+      { id: "tab2", name: "All", onClick: action("ClickAll"), disabled: false },
+      {
+        id: "tab3",
+        name: "Трейтья",
+        onClick: action("ClickТретья"),
+        disabled: false,
+      },
     ],
-    active: 'All',
-    title: 'Title',
+    active: "All",
+    title: "Title",
   },
-}
+};

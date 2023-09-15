@@ -34,7 +34,7 @@ type PropsType = {
   dataHeadersTable?: DataHeaderType[];
   sendDataToServer?: (value: string) => void;
   deleteItem: (id: string) => void;
-  totalItems: number | undefined;
+  totalItems: number;
 };
 type SortType = {
   key: string;
@@ -139,7 +139,7 @@ export const TableDecks = ({
                 <EditIcon onClick={() => showEdit(item.id)} />
                 <DeleteIcon
                   style={{ cursor: "unset" }}
-                  onClick={() => beforeDeleteHandler(item.id, item.name)}
+                  onClick={() => beforeDeleteHandler(item.id)}
                 />
                 {show && (
                   <div className={st.s}>

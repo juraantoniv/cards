@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { CheckboxDemo } from "./checkbox.tsx";
+import { CheckboxUniversal } from "./checkbox.tsx";
 
 const meta = {
   title: "Components/Checkbox",
-  component: CheckboxDemo,
+  component: CheckboxUniversal,
   tags: ["autodocs"],
   argTypes: {
-    checked: {
+    value: {
       control: { type: "boolean" },
       description: "Specifies whether the checkbox is selected or not.",
     },
@@ -16,26 +16,26 @@ const meta = {
       description: "Specifies to disabled Checkbox.",
     },
   },
-} satisfies Meta<typeof CheckboxDemo>;
+} satisfies Meta<typeof CheckboxUniversal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const True: Story = {
   args: {
-    checked: true,
+    value: true,
   },
 };
 
 export const False: Story = {
   args: {
-    checked: false,
+    value: false,
   },
 };
 export const Disabled: Story = {
   args: {
     disabled: true,
-    checked: true,
+    value: true,
   },
 };
 

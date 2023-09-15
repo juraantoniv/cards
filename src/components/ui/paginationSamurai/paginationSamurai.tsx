@@ -9,7 +9,7 @@ import { SelectControl } from "../select";
 import st from "./paginationSamurai.module.scss";
 
 type PropsType = {
-  allElements: number | undefined;
+  allElements: number;
 };
 export const PaginationSamurai = ({ allElements }: PropsType) => {
   const dispatch = useAppDispatch();

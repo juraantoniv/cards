@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useDispatch } from "react-redux";

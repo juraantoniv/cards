@@ -1,4 +1,4 @@
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { decksResponse } from "../../types.ts";
 
@@ -47,7 +47,7 @@ export const decksSlice = createSlice({
     setId: (state, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
-    setCardCount: (state, action: PayloadAction<Array>) => {
+    setCardCount: (state, action: PayloadAction<number[]>) => {
       state.cardsCount = action.payload;
     },
     setAuthorId: (state, action: PayloadAction<string>) => {

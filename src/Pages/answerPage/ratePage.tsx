@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +30,7 @@ const RatePage = () => {
   const [setRate] = useSetRateMutation();
 
   const onclickHandler = () => {
-    dispatch(decksSlice.actions.setPrevious(data?.id));
+    dispatch(decksSlice.actions.setPrevious(data?.id || ""));
     navigate("/learn");
   };
 

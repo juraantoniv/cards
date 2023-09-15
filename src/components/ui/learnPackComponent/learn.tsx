@@ -1,13 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-import { boolean } from "zod";
-
-import { useAppSelector } from "../../../../store.ts";
-import {
-  radio,
-  RadioButtonsGroup,
-} from "../../../Pages/radioButtons/radio.tsx";
-import { useGetRandomCardQuery } from "../../../services/decs-query.ts";
+import { RadioButtonsGroup } from "../../../Pages/radioButtons/radio.tsx";
 import { Button } from "../button";
 import { CardComponent } from "../cardComponent";
 import { Typography } from "../typography";
@@ -36,14 +29,9 @@ export type learnPropsType = {
   callback: () => void;
   getValue?: (value: string) => void;
 };
-const Learn: React.FC<learnPropsType> = ({
-  answer,
-  data,
-  callback,
-  getValue,
-}) => {
+const Learn: FC<learnPropsType> = ({ answer, data, callback, getValue }) => {
   const onChangeHandler = (value: string) => {
-    getValue(value);
+    getValue?.(value);
   };
 
   return (

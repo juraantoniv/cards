@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 import { createDecks, DecksForm } from "../../components/ui/createDecks";
 import { useEditCardMutation } from "../../services/decs-query.ts";
@@ -9,22 +9,16 @@ type editType = {
   headerName?: string;
   editModeCard: boolean;
   editCardHandler: (data: createDecks) => void;
-  question?: string;
 };
-const EditCardPage: React.FC<editType> = ({
+const EditCardPage: FC<editType> = ({
   id,
   headerName,
 
   callback,
   editModeCard,
   editCardHandler: EditHandler,
-  question,
 }) => {
-  const [editCard, {}] = useEditCardMutation();
-
-  const dataForm = (data: any) => {
-    editCard({ id: id, data: data });
-  };
+  useEditCardMutation();
 
   const editCardHandler = (data: createDecks) => {
     EditHandler(data);
@@ -33,7 +27,6 @@ const EditCardPage: React.FC<editType> = ({
   return (
     <>
       <DecksForm
-        setData={dataForm}
         carId={id}
         dataHandler={editCardHandler}
         headerName={headerName}

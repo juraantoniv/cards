@@ -131,7 +131,7 @@ const Decks = () => {
             dataContentTable={data?.items}
             deleteItem={deleteDeck}
             dataHeadersTable={headerDecksItems}
-            totalItems={data?.pagination.totalItems}
+            totalItems={data?.pagination.totalItems || 0}
           />
         </table>
       )}

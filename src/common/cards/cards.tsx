@@ -218,7 +218,6 @@ const Cards = () => {
             callback={closeFormHandler}
             headerName={"EditCard"}
             editModeCard={true}
-            question={"Question"}
           />
         </div>
       )}

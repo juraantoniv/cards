@@ -30,6 +30,7 @@
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-tabs": "^1.0.4",
     "@reduxjs/toolkit": "^1.9.5",
+    "@storybook/addon-actions": "^7.4.2",
     "async-mutex": "^0.4.0",
     "clsx": "^2.0.0",
     "omit-deep": "^0.3.0",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -41,13 +41,12 @@ type createDecksType = {
   editModeCard?: boolean;
   dataHandler?: (data: createDecks) => void;
   carId?: string;
-  setData?: (data: any) => void;
   question?: string;
 };
 
 // ctx. data - это объект, содержащий значения всех полей формы, которые будут проверяться на валидность. ctx - это объект, который предоставляет методы для добавления ошибок валидации.
 
-export const DecksForm: React.FC<createDecksType> = ({
+export const DecksForm: FC<createDecksType> = ({
   callback,
   headerName,
   forEditFlag,
@@ -56,17 +55,17 @@ export const DecksForm: React.FC<createDecksType> = ({
   func,
   editModeCard,
   carId,
-  setData,
   question,
 }) => {
   const { data: deck } = useGetByIdQuery({
-    id: id,
+    id: id || "",
   });
 
   const { data: card } = useGetCardByIdQuery({
     id: carId,
   });
 
+  // eslint-disable-next-line
   const item = id ? deck?.name : carId ? card?.question : "";
 
   const { handleSubmit, control } = useForm<createDecks>({
@@ -77,17 +76,13 @@ export const DecksForm: React.FC<createDecksType> = ({
     },
   });
 
-  const setFormData = (data: any) => {
-    setData(data);
-  };
-
   const [imageItems, setImagItems] = useState(true);
 
   const handlerOnSubmit = (data: createDecks) => {
-    dataHandler(data);
+    dataHandler?.(data);
   };
 
-  const selectOnChangeHandler = (item: string) => {
+  const selectOnChangeHandler = (item?: string) => {
     if (item === "Text") {
       setImagItems(true);
     }
@@ -95,8 +90,6 @@ export const DecksForm: React.FC<createDecksType> = ({
       setImagItems(false);
     }
   };
-
-  console.log(question);
 
   return (
     <CardComponent className={st.common}>
@@ -147,6 +140,7 @@ export const DecksForm: React.FC<createDecksType> = ({
               </Button>
               <Button type={"submit"} className={st.but2}>
                 <Typography variant={"body2"}>
+                  {/* eslint-disable-next-line no-nested-ternary */}
                   {forEditFlag
                     ? "Edit"
                     : headerName === "EditCard"
@@ -159,7 +153,7 @@ export const DecksForm: React.FC<createDecksType> = ({
         </form>
       ) : (
         <div>
-          <FileUpload id={id} setData={setFormData} />
+          <FileUpload id={id || ""} />
         </div>
       )}
     </CardComponent>

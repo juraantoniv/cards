@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import IconButton from "@mui/material/IconButton";
@@ -18,10 +18,9 @@ type FormData = {
 
 type FileUploadType = {
   id: string;
-  setData?: (data: any) => void;
 };
 
-export const FileUpload: React.FC<FileUploadType> = ({ id, setData }) => {
+export const FileUpload: FC<FileUploadType> = ({ id }) => {
   const { register, handleSubmit } = useForm<FormData>();
 
   const [createCard, {}] = useCreateCardMutation();
