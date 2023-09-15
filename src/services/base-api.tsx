@@ -6,5 +6,5 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   tagTypes: ["Decks", "Cards", "getName"],
   baseQuery: customFetchBase,
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });
