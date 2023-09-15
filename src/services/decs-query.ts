@@ -249,12 +249,14 @@ const extendedApi = baseApi.injectEndpoints({
           };
         },
         async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          // @ts-ignore
           const patchResult = dispatch(
             baseApi.util.updateQueryData("me", undefined, () => {
               return null;
             }),
           );
 
+          // @ts-ignore
           const patchResultDecks = dispatch(
             baseApi.util.updateQueryData("getDecks", undefined, () => {
               return null;
