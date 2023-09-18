@@ -80,7 +80,7 @@ const Decks = () => {
 
   useEffect(() => {
     if (!LogOutData) {
-      return;
+      navigate("/login");
     } else if (LogOutData) {
       navigate("/");
     }
