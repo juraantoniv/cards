@@ -7,7 +7,6 @@ import {
 
 import { IconClose } from "../../../assets/icons/iconClose.tsx";
 import { IconEye } from "../../../assets/icons/iconEye.tsx";
-import { IconSearch } from "../../../assets/icons/iconSearch.tsx";
 
 import st from "./textField.module.scss";
 
@@ -80,8 +79,6 @@ export const TextField = (props: PropsInputBaseType) => {
         className={error ? st.error : st.blockIconInput}
         style={{ maxWidth: sizeWidthTextField }}
       >
-        {type === "text" && <IconSearch className={st.iconSearch} />}
-
         <input
           className={`${st[type]}  ${className}
                     ${error ? st.errorInput : st.input}`}

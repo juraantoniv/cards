@@ -8,10 +8,10 @@ import { useAppDispatch } from "../../../../store.ts";
 import { IconEdit } from "../../../assets/icons/iconEdit.tsx";
 import { Logout } from "../../../assets/icons/iconLogOut.tsx";
 import IconPlayCircle from "../../../assets/icons/LearnIcon.tsx";
+import { meType } from "../../../Pages/layout/MainLayout.tsx";
 import { useLogOutMutation } from "../../../services/decs-query.ts";
 import { decksSlice } from "../../../services/slices.ts";
 import { AvatarDemo } from "../avatar/avatar.tsx";
-import { meType } from "../layout/MainLayout.tsx";
 import { Typography } from "../typography";
 
 import s from "./drop-downComponent.module.scss";

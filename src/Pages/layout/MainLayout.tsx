@@ -4,10 +4,10 @@ import LinearProgress from "@mui/material/LinearProgress/LinearProgress";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { useMeQuery } from "../../../services/decs-query.ts";
-import { decksSlice } from "../../../services/slices.ts";
-import { DropdownMenuComponent } from "../drop-down-menu";
-import { Header } from "../header";
+import { DropdownMenuComponent } from "../../components/ui/drop-down-menu";
+import { Header } from "../../components/ui/header";
+import { useMeQuery } from "../../services/decs-query.ts";
+import { decksSlice } from "../../services/slices.ts";
 
 const style = {
   display: "flex",

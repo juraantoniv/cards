@@ -8,11 +8,11 @@ import Cards from "../common/cards/cards.tsx";
 import { CheckEmail } from "../components/ui/checkEmail";
 import { EditProfile } from "../components/ui/editProfile";
 import { ForgotYourPassword } from "../components/ui/forgotYourPassword";
-import MainLayout from "../components/ui/layout/MainLayout.tsx";
 import { Login } from "../components/ui/login";
 import { Register } from "../components/ui/register";
 import RatePage from "../Pages/answerPage/ratePage.tsx";
 import Decks from "../Pages/Decks/Decks.tsx";
+import MainLayout from "../Pages/layout/MainLayout.tsx";
 import LearnPage from "../Pages/learnPage/learnPage.tsx";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage.tsx";
 
