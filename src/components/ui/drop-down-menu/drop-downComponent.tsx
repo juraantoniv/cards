@@ -20,7 +20,7 @@ import s from "./drop-downComponent.module.scss";
 
 type DropdownProps = {
   arrItems: Array<string>;
-  data?: meType;
+  data?: meType | null;
   children?: ReactNode;
   id?: string;
   img?: string;

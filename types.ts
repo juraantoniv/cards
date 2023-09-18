@@ -39,4 +39,4 @@ export type decksResponse = {
   maxCardsCount: number;
   pagination: Pagination;
   items: DataItemType[];
-};
+} | null;

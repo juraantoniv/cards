@@ -5,15 +5,17 @@ import { FormLoginType } from "../components/ui/login";
 
 import { baseApi } from "./base-api.tsx";
 
-type getDecksArgs = {
-  minCardsCount?: string;
-  maxCardsCount?: string;
-  name?: string;
-  authorId?: string;
-  orderBy?: string;
-  currentPage?: string;
-  itemsPerPage?: string;
-};
+type getDecksArgs =
+  | {
+      minCardsCount?: string;
+      maxCardsCount?: string;
+      name?: string;
+      authorId?: string;
+      orderBy?: string;
+      currentPage?: string;
+      itemsPerPage?: string;
+    }
+  | undefined;
 type Items = {
   id: string;
   deckId: string;
@@ -120,7 +122,7 @@ const extendedApi = baseApi.injectEndpoints({
         },
         providesTags: ["Cards"],
       }),
-      me: builder.query<meType, void>({
+      me: builder.query<meType | null, void>({
         query: () => {
           return {
             url: `/v1/auth/me`,
@@ -248,34 +250,32 @@ const extendedApi = baseApi.injectEndpoints({
             method: "POST",
           };
         },
-        // async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        //   // @ts-ignore
-        //   const patchResult = dispatch(
-        //     baseApi.util.updateQueryData("me", undefined, () => {
-        //       return null;
-        //     }),
-        //   );
-        //
-        //   // @ts-ignore
-        //   const patchResultDecks = dispatch(
-        //     baseApi.util.updateQueryData("getDecks", undefined, () => {
-        //       return null;
-        //     }),
-        //   );
-        //
-        //   try {
-        //     await queryFulfilled;
-        //   } catch {
-        //     patchResult.undo();
-        //     patchResultDecks.undo();
-        //
-        //     /**
-        //      * Alternatively, on failure you can invalidate the corresponding cache tags
-        //      * to trigger a re-fetch:
-        //      * dispatch(api.util.invalidateTags(['Post']))
-        //      */
-        //   }
-        // },
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(
+            extendedApi.util.updateQueryData("me", undefined, () => {
+              return null;
+            }),
+          );
+
+          const patchResultDecks = dispatch(
+            extendedApi.util.updateQueryData("getDecks", undefined, () => {
+              return null;
+            }),
+          );
+
+          try {
+            await queryFulfilled;
+          } catch {
+            patchResult.undo();
+            patchResultDecks.undo();
+
+            /**
+             * Alternatively, on failure you can invalidate the corresponding cache tags
+             * to trigger a re-fetch:
+             * dispatch(api.util.invalidateTags(['Post']))
+             */
+          }
+        },
       }),
       recoveryPassword: builder.mutation<any, string>({
         query: (email) => {

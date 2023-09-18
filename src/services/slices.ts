@@ -62,13 +62,5 @@ export const decksSlice = createSlice({
     editMode: (state, action: PayloadAction<boolean>) => {
       state.editMode = action.payload;
     },
-    getDecks: (
-      state,
-      action: PayloadAction<{ items: decksResponse; id: string }>,
-    ) => {
-      state.decks.items = action.payload.items.items.filter(
-        (el) => el.author.name === action.payload.id,
-      );
-    },
   },
 });

@@ -19,7 +19,7 @@ import { Typography } from "../typography";
 import st from "./profile.module.scss";
 
 type ProfileProps = {
-  name: string | undefined;
+  name: string | undefined | null;
   email: string | undefined;
 };
 
